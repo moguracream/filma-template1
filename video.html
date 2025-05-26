@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Page</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .video-container {
+      display: flex;
+      justify-content: center;
+      margin: 40px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Video</h1>
+  <div class="video-container">
+    <video id="video" width="640" height="360" controls>
+      <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+  <script>
+    // Example of using query parameters if needed
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get('video');
+    // Here you could switch source based on id
+  </script>
+</body>
+</html>
