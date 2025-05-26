@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Video Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
   <style>
-    .video-container {
-      display: flex;
-      justify-content: center;
-      margin: 40px;
+    .video-container video {
+      max-width: 640px;
     }
   </style>
 </head>
-<body>
-  <h1>Video</h1>
-  <div class="video-container">
-    <video id="video" width="640" height="360" controls>
+<body class="bg-light">
+  <div class="container py-4">
+    <h1 class="text-center mb-4">Video</h1>
+    <div class="video-container d-flex justify-content-center">
+      <video id="video" class="w-100" height="360" controls>
       <source src="https://samplelib.com/lib/preview/mp4/sample-5s.mp4" type="video/mp4">
       Your browser does not support the video tag.
-    </video>
+      </video>
+    </div>
   </div>
   <script>
     // Example of using query parameters if needed
@@ -27,5 +28,6 @@
     const id = params.get('video');
     // Here you could switch source based on id
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
