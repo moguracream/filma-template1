@@ -1,0 +1,28 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  text-align: center;
+  margin: 20px 0;
+}
+.category {
+  margin: 20px;
+}
+.thumbnail-row {
+  display: flex;
+  overflow-x: auto;
+}
+.thumbnail-row a {
+  flex: 0 0 auto;
+  margin-right: 10px;
+  text-decoration: none;
+}
+.thumbnail-row img {
+  display: block;
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 4px;
+}
