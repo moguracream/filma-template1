@@ -1,33 +1,4 @@
 {
   "url": "https://context7.com/moguracream/filma-docs",
-  "public_key": "pk_zFFhrI6maG2MP9MTZWoJg",
-  "projectTitle": "Filma",
-  "description": "動画配信プラットフォーム Filma (PaaS) の API 仕様書・管理マニュアル・実装テンプレート。MPEG-DASH によるアダプティブストリーミングとマルチ DRM (Widevine / PlayReady / FairPlay) に対応し、Storage / Player / DASH / HLS / DRM ライセンス / Customers / Entitlements の各 API と、動画の埋め込み・署名付き URL・会員/視聴権管理の実装方法を提供します。",
-  "branch": "master",
-  "folders": [
-    "api-spec/docs",
-    "admin-manual/docs",
-    "template-jwt",
-    "template-no-auth"
-  ],
-  "excludeFolders": [
-    "lp",
-    "scripts",
-    "assets",
-    "**/site"
-  ],
-  "excludeFiles": [
-    "api_specification.md",
-    "service_level_agreement.md",
-    "terms_of_service_template.md"
-  ],
-  "rules": [
-    "API のベース URL は https://filma.biz/filmaapi 、レスポンスは JSON、日時は ISO 8601 形式",
-    "すべてのリクエストで認証が必要。API キー認証 (X-Api-Key ヘッダーまたは api_key クエリパラメータ) と JWT 認証 (Authorization: Bearer / filmajwt Cookie / jwt クエリパラメータ) のいずれかを使う",
-    "API キーと JWT の両方が渡された場合は API キー認証が優先される。ブラウザに古い JWT が残っていても API キーがあれば無視される",
-    "ドメインアクセス制限は API キー認証にのみ適用される。JWT 認証には適用されない",
-    "一覧系エンドポイントの per_page は最大 100 件。100 を超える値を指定すると既定の 20 件に丸められる",
-    "非公開ファイルを含めて取得するには show_all=true と fullaccess 権限の両方が必要。公開期限 (published_until) 切れのファイルは公開扱いにならない",
-    "本番環境では API キーをフロントエンドに露出させず、バックエンドで短期 JWT を発行する。template-jwt は動作確認のために JWT 発行処理を JavaScript で実装したデモであり、そのまま本番利用しない"
-  ]
+  "public_key": "pk_zFFhrI6maG2MP9MTZWoJg"
 }
