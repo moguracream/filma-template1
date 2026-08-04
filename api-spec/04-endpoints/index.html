@@ -562,7 +562,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ファイルアップロード
+        ファイルアップロード（未実装）
       
     </span>
   </a>
@@ -589,12 +589,12 @@
   <a href="#encode-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Encode API
+        Encode API（未実装）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Encode API">
+    <nav class="md-nav" aria-label="Encode API（未実装）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1297,7 +1297,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ファイルアップロード
+        ファイルアップロード（未実装）
       
     </span>
   </a>
@@ -1324,12 +1324,12 @@
   <a href="#encode-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Encode API
+        Encode API（未実装）
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Encode API">
+    <nav class="md-nav" aria-label="Encode API（未実装）">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1795,10 +1795,10 @@
 <p><strong>レスポンス例:</strong></p>
 <p><strong>成功時（HTTP 200）</strong></p>
 <pre><code class="language-json">{
-  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDQwMDcyMDAsImlhdCI6MTcwMzkyMDgwMCwibWVkaWFmaWxlX2lkIjoxMjM0NX0.signature&quot;,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9...signature&quot;,
   &quot;token_type&quot;: &quot;Bearer&quot;,
-  &quot;expires_in&quot;: 86400,
-  &quot;expires_at&quot;: 1704007200,
+  &quot;expires_in&quot;: 7200,
+  &quot;expires_at&quot;: 1703928000,
   &quot;user_id&quot;: 1,
   &quot;organization_id&quot;: 1,
   &quot;api_type&quot;: &quot;readonly&quot;,
@@ -1813,7 +1813,7 @@
   &quot;auth_method&quot;: &quot;api_key&quot;,
   &quot;mediafile_id&quot;: 12345,
   &quot;iat&quot;: 1703920800,
-  &quot;exp&quot;: 1704007200
+  &quot;exp&quot;: 1703928000
 }
 </code></pre>
 <table>
@@ -1971,10 +1971,10 @@
 <p><strong>レスポンス例:</strong></p>
 <p><strong>成功時（HTTP 200）</strong></p>
 <pre><code class="language-json">{
-  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJvcmdhbml6YXRpb25faWQiOjEsImV4cCI6MTcwNDAwNzIwMCwiaWF0IjoxNzAzOTIwODAwfQ.new_signature&quot;,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9...new_signature&quot;,
   &quot;token_type&quot;: &quot;Bearer&quot;,
-  &quot;expires_in&quot;: 86400,
-  &quot;expires_at&quot;: 1704093600,
+  &quot;expires_in&quot;: 3600,
+  &quot;expires_at&quot;: 1703924400,
   &quot;user_id&quot;: 1,
   &quot;organization_id&quot;: 1,
   &quot;api_type&quot;: &quot;readonly&quot;
@@ -3076,7 +3076,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 </tr>
 </tbody>
 </table>
-<h4 id="_13">ファイルアップロード</h4>
+<h4 id="_13">ファイルアップロード（未実装）</h4>
 <pre><code>POST /filmaapi/storage
 </code></pre>
 <p><strong>権限:</strong> fullaccess権限が必要</p>
@@ -3188,7 +3188,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 <li>削除されたファイルは、通常のAPI呼び出しでは取得できなくなります</li>
 <li>削除されたファイルは、配信対象外として扱われます</li>
 </ul>
-<h3 id="encode-api">Encode API</h3>
+<h3 id="encode-api">Encode API（未実装）</h3>
 <p>動画エンコーディングの管理を行います。</p>
 <p><em>注: 以下のエンドポイントは現在未実装です。</em></p>
 <h4 id="_15">エンコード状況取得</h4>
