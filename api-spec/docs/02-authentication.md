@@ -93,10 +93,10 @@ curl -X POST "https://filma.biz/filmaapi/token?api_key=your_api_key" \
 **レスポンス例:**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJvcmdhbml6YXRpb25faWQiOjEsImV4cCI6MTcwNDAwNzIwMCwiaWF0IjoxNzAzOTIwODAwfQ.signature",
+  "token": "eyJhbGciOiJIUzI1NiJ9...signature",
   "token_type": "Bearer",
-  "expires_in": 86400,
-  "expires_at": 1704007200,
+  "expires_in": 3600,
+  "expires_at": 1703924400,
   "user_id": 1,
   "organization_id": 1,
   "api_type": "readonly"
@@ -165,4 +165,3 @@ curl -H "Referer: https://any-domain.com/video.html" \
 - **トークンリフレッシュ**: 有効なトークンから新しいトークンを発行可能
 - **Cookie自動設定**: HTTPS環境でのJWTトークン発行時にCookieが自動設定される
 - **CSRF保護**: SameSite=Lax設定により、外部サイトからのPOSTリクエストを自動的に保護
-

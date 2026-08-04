@@ -69,10 +69,10 @@ curl -X POST "https://filma.biz/filmaapi/token" \
 **成功時（HTTP 200）**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDQwMDcyMDAsImlhdCI6MTcwMzkyMDgwMCwibWVkaWFmaWxlX2lkIjoxMjM0NX0.signature",
+  "token": "eyJhbGciOiJIUzI1NiJ9...signature",
   "token_type": "Bearer",
-  "expires_in": 86400,
-  "expires_at": 1704007200,
+  "expires_in": 7200,
+  "expires_at": 1703928000,
   "user_id": 1,
   "organization_id": 1,
   "api_type": "readonly",
@@ -91,7 +91,7 @@ curl -X POST "https://filma.biz/filmaapi/token" \
   "auth_method": "api_key",
   "mediafile_id": 12345,
   "iat": 1703920800,
-  "exp": 1704007200
+  "exp": 1703928000
 }
 ```
 
@@ -207,10 +207,10 @@ curl -X POST "https://filma.biz/filmaapi/token/refresh" \
 **成功時（HTTP 200）**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJvcmdhbml6YXRpb25faWQiOjEsImV4cCI6MTcwNDAwNzIwMCwiaWF0IjoxNzAzOTIwODAwfQ.new_signature",
+  "token": "eyJhbGciOiJIUzI1NiJ9...new_signature",
   "token_type": "Bearer",
-  "expires_in": 86400,
-  "expires_at": 1704093600,
+  "expires_in": 3600,
+  "expires_at": 1703924400,
   "user_id": 1,
   "organization_id": 1,
   "api_type": "readonly"
@@ -769,7 +769,7 @@ GET /filmaapi/storage/folders/{id}
 | creator | string | フォルダ作成者名 |
 | updater | string | フォルダ更新者名 |
 
-#### ファイルアップロード
+#### ファイルアップロード（未実装）
 
 ```
 POST /filmaapi/storage
@@ -827,7 +827,7 @@ DELETE /filmaapi/storage/{id}
 - 削除されたファイルは、通常のAPI呼び出しでは取得できなくなります
 - 削除されたファイルは、配信対象外として扱われます
 
-### Encode API
+### Encode API（未実装）
 
 動画エンコーディングの管理を行います。
 
