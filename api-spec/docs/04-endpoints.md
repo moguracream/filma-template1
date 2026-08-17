@@ -69,10 +69,10 @@ curl -X POST "https://filma.biz/filmaapi/token" \
 **成功時（HTTP 200）**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9...signature",
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDQwMDcyMDAsImlhdCI6MTcwMzkyMDgwMCwibWVkaWFmaWxlX2lkIjoxMjM0NX0.signature",
   "token_type": "Bearer",
-  "expires_in": 7200,
-  "expires_at": 1703928000,
+  "expires_in": 86400,
+  "expires_at": 1704007200,
   "user_id": 1,
   "organization_id": 1,
   "api_type": "readonly",
@@ -91,7 +91,7 @@ curl -X POST "https://filma.biz/filmaapi/token" \
   "auth_method": "api_key",
   "mediafile_id": 12345,
   "iat": 1703920800,
-  "exp": 1703928000
+  "exp": 1704007200
 }
 ```
 
@@ -207,10 +207,10 @@ curl -X POST "https://filma.biz/filmaapi/token/refresh" \
 **成功時（HTTP 200）**
 ```json
 {
-  "token": "eyJhbGciOiJIUzI1NiJ9...new_signature",
+  "token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJvcmdhbml6YXRpb25faWQiOjEsImV4cCI6MTcwNDAwNzIwMCwiaWF0IjoxNzAzOTIwODAwfQ.new_signature",
   "token_type": "Bearer",
-  "expires_in": 3600,
-  "expires_at": 1703924400,
+  "expires_in": 86400,
+  "expires_at": 1704093600,
   "user_id": 1,
   "organization_id": 1,
   "api_type": "readonly"
@@ -769,7 +769,7 @@ GET /filmaapi/storage/folders/{id}
 | creator | string | フォルダ作成者名 |
 | updater | string | フォルダ更新者名 |
 
-#### ファイルアップロード（未実装）
+#### ファイルアップロード
 
 ```
 POST /filmaapi/storage
@@ -827,7 +827,7 @@ DELETE /filmaapi/storage/{id}
 - 削除されたファイルは、通常のAPI呼び出しでは取得できなくなります
 - 削除されたファイルは、配信対象外として扱われます
 
-### Encode API（未実装）
+### Encode API
 
 動画エンコーディングの管理を行います。
 
@@ -891,10 +891,42 @@ GET /filmaapi/player/{id}
 
 - デフォルトでは公開されたファイルのみアクセス可能
 - `show_all=true`かつfullaccess権限の場合、非公開ファイルもアクセス可能
+- HTMLプレイヤー画面の返却成功はアクセスログへ記録されません。認証・公開状態・視聴権の確認で拒否された場合だけ、`player`種別の拒否ログとして記録されます
+- 期限付きURLから再生継続用JWTへ交換した場合は、元の期限付きURL IDを引き継ぎ、後続のルートMPD/HLSアクセスを期限付きURL経由として記録します
+
+### Download API
+
+ファイルのダウンロード先となる署名付きURLへリダイレクトします。
+
+```
+GET /filmaapi/download/{id}
+```
+
+**パラメータ:**
+
+| パラメータ名 | 型 | 必須 | デフォルト | 説明 |
+|---|---|---|---|---|
+| api_key | string | * | - | APIキー（JWT認証時は不要） |
+| jwt | string | * | - | JWTトークン（APIキー認証時は不要） |
+| id | integer | ✓ | - | メディアファイルID |
+
+**認証:** APIキー認証、JWT認証、またはCookie認証のいずれか
+
+**レスポンス:**
+
+- 認証成功時は署名付きダウンロードURLへのHTTP 302リダイレクト
+
+**アクセスログ:**
+
+- 署名付きダウンロードURLを生成し、HTTP 302リダイレクトを確定した時点で`download`種別の「成功」として記録されます
+- 読み取り可能なStorageがなくダウンロード先を生成できない場合は「失敗」として記録されます
+- ブラウザでのキャンセルや保存ダイアログの操作はサーバーから確認できないため、ファイルが実際にクライアント端末へ保存されていない場合も「成功」として記録されます
 
 ### DASH API
 
 DASH形式での動画配信を行います。
+
+ルートMPDのGETは、通常のプレイヤー画面と埋め込みHTML・APIのどの経路でもプレイヤー入口として1件記録されます。`/filmaapi/player`はHTML表示成功を記録せず、マニフェストへ到達する前の拒否だけを記録します。
 
 #### DASH配信
 
@@ -926,6 +958,8 @@ GET /filmaapi/dash/{id}.mpd
 ### HLS API
 
 HLS形式での動画配信を行います。
+
+ルートのHLSマスタープレイリストGETは、通常のプレイヤー画面と埋め込みHTML・APIのどの経路でもプレイヤー入口として1件記録されます。`/filmaapi/player`のHTML表示成功、HLSメディアプレイリスト、HEADは記録対象外です。
 
 #### HLS配信
 
@@ -992,6 +1026,8 @@ HEAD /filmaapi/hls/{id}.m3u8
 
 DRM（Widevine/FairPlay/PlayReady）ライセンスの取得を行います。
 Filma APIキー認証またはJWT認証が必要です。
+
+Widevine・FairPlayライセンス要求がFilmaサーバー内で失敗した場合は、`[Filma][DRM_LICENSE_FAILURE]`タグ、DRM方式、処理段階、固定理由コード、HTTP状態、認証済みのMediafile・組織・会員ID、アクセス先URL、送信元IPアドレスをEgalite技術ログへ記録します。JWT、APIキー、ライセンス要求・応答本文、URLのクエリ文字列は記録しません。DRM失敗はアクセス解析の成否には反映しません。現在のプレイヤーが外部ライセンスサーバーへ直接要求するPlayReadyと、Filmaサーバーへ到達しないクライアント側エラーは記録対象外です。
 
 **JWTのmediafile_idについて（DRMライセンス共通）:**
 
