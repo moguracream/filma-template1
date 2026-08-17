@@ -1,7 +1,7 @@
 # 注意事項
 
 - APIキー認証またはJWT認証が各リクエストに必要です
-- JWT認証は3つの方法（Authorizationヘッダー、`filmajwt` Cookie、`jwt`クエリパラメータ）で利用可能です
+- JWT認証は2つの方法（Authorization header、Cookie）で利用可能です
 - 管理画面にログインすると、JWTトークンが自動でCookieに設定されます
 - fullaccess権限が必要な操作は明記されています
 - ページングは最大100件まで取得可能です
