@@ -10,13 +10,9 @@
       
       
       
-        <link rel="canonical" href="https://docs.filma.biz/admin-manual/signedurl/">
+        <link rel="canonical" href="https://docs.filma.biz/admin-manual/accesslog/">
       
       
-        <link rel="prev" href="../publish/">
-      
-      
-        <link rel="next" href="../embed_html/">
       
       
         
@@ -27,7 +23,7 @@
     
     
       
-        <title>期限付きURLの発行 - Filma Admin Manual</title>
+        <title>アクセスログ収集と解析 - Filma Admin Manual</title>
       
     
     
@@ -72,7 +68,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#url" class="md-skip">
+        <a href="#_1" class="md-skip">
           コンテンツにスキップ
         </a>
       
@@ -108,7 +104,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              期限付きURLの発行
+              アクセスログ収集と解析
             
           </span>
         </div>
@@ -400,8 +396,6 @@
       
   
   
-    
-  
   
   
     
@@ -414,11 +408,11 @@
       
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
@@ -439,7 +433,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             
@@ -454,37 +448,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    期限付きURLの発行
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../signedurl/" class="md-nav__link">
         
   
   
@@ -500,120 +467,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="目次">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      目次
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#url_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        画面URL
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        発行（派生メディア単位）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        一覧と運用
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        注意
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        公開設定との関係（重要）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        アクセス数について
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_6" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        検索・フィルタ・再発行の注意点
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="検索・フィルタ・再発行の注意点">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        次にやること / 関連
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1218,7 +1071,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#url_1" class="md-nav__link">
+  <a href="#url" class="md-nav__link">
     <span class="md-ellipsis">
       
         画面URL
@@ -1229,21 +1082,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        発行（派生メディア単位）
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#_2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        一覧と運用
+        記録されるアクセス
       
     </span>
   </a>
@@ -1254,7 +1096,7 @@
   <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
-        注意
+        画面の見方
       
     </span>
   </a>
@@ -1265,7 +1107,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        公開設定との関係（重要）
+        急増・急減の判定
       
     </span>
   </a>
@@ -1276,7 +1118,7 @@
   <a href="#_5" class="md-nav__link">
     <span class="md-ellipsis">
       
-        アクセス数について
+        検索・フィルター
       
     </span>
   </a>
@@ -1287,27 +1129,21 @@
   <a href="#_6" class="md-nav__link">
     <span class="md-ellipsis">
       
-        検索・フィルタ・再発行の注意点
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="検索・フィルタ・再発行の注意点">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#_7" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        次にやること / 関連
+        参照元と会員情報の注意
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#url_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        期限付きURLの旧アクセス数
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1328,65 +1164,83 @@
 
 
 
-<h1 id="url">期限付きURLの発行</h1>
-<p><a href="../#_3">← クイックスタートへ戻る</a></p>
-<h2 id="url_1">画面URL</h2>
+<h1 id="_1">アクセスログ収集と解析</h1>
+<p>Filmaのストリーミング開始とダウンロード入口へのアクセスを確認できます。</p>
+<h2 id="url">画面URL</h2>
 <ul>
-<li>発行: <code>/filmaadmin/signedurl/issue/:mediafile_id</code></li>
-<li>一覧: <code>/filmaadmin/signedurl/list/:file_id</code> または <code>/filmaadmin/signedurl/list?mediafile_id=:mediafile_id</code></li>
-<li>詳細: <code>/filmaadmin/signedurl/detail/:signed_url_id</code></li>
+<li>Platform全体アクセス解析: <code>/filmaplatform/accesslog/</code>（組織フィルターを含む共通画面）</li>
+<li>Filma管理画面: <code>/filmaadmin/accesslog</code>（全体スイッチ有効時のみ）</li>
 </ul>
-<h2 id="_1">発行（派生メディア単位）</h2>
-<ol>
-<li>「ファイル詳細」(<code>/filmaadmin/file/detail/:file_id</code>) → 「派生メディア」
-   ※「派生メディア」は折りたたみ表示のため、見出しをクリックして開きます。</li>
-<li>対象解像度行の「期限付きURL生成」をクリック → 発行画面（<code>/filmaadmin/signedurl/issue/:mediafile_id</code>）へ遷移
-   <img alt="ファイル詳細 → 派生メディア（期限付きURL生成ボタン）" src="../img/file_detail_children_placeholder.svg" /></li>
-<li>発行画面で「URL有効期限」「メモ」を入力し「保存」
-   <img alt="期限付きURL発行 画面" src="../img/signedurl_issue_placeholder.svg" /></li>
-<li>生成結果が同画面に表示され、URLをコピー可能（保存ボタンの下に成功メッセージと生成URL欄が表示されます）
-   <img alt="発行後（生成結果の表示とコピー）" src="../img/signedurl_issue_result_placeholder.svg" /></li>
-</ol>
-<h2 id="_2">一覧と運用</h2>
+<p>初期リリースではFilma管理画面のアクセス解析を非公開にし、データ収集だけを行います。filmaplatformでは「全体アクセス解析」に集計・ランキング・明細を一本化し、組織フィルターで全組織または特定組織へ表示範囲を切り替えます。旧URLの<code>/filmaplatform/accesslog/analytics</code>は、検索条件を引き継いで共通画面へリダイレクトします。</p>
+<p>Platformの組織一覧にある各組織の「アクセス解析」ボタンから、対象組織を選択した状態で共通画面を開くこともできます。</p>
+<p>PlatformとFilma管理画面のファイル一覧・ファイル詳細にある「アクセス解析」ボタンから、対象組織とファイルを指定した状態で開くこともできます。Filma管理画面のボタンは全体スイッチ有効時だけ表示します。</p>
+<p><code>FILMA_ADMIN_ACCESS_ANALYTICS_ENABLED=true</code>を設定してアプリケーションを再起動すると、Filma管理画面のメニュー、詳細画面の導線、期限付きURLの新履歴集計、アクセス解析画面を一括で有効にできます。公開時も管理者種別による分岐は行いません。Filma管理画面では所属組織の外部アクセスだけを表示し、内部操作は一覧・集計・詳細のすべてから除外します。</p>
+<h2 id="_2">記録されるアクセス</h2>
 <ul>
-<li>一覧で検索（メモ）/フィルタ（有効/全件/無効）に対応</li>
-<li>各行から「URLをコピー」「無効にする」「再発行」「詳細」
-   <img alt="期限付きURL 一覧画面" src="../img/signedurl_list_placeholder.svg" /></li>
+<li>ストリーミング入口: <code>/filmaapi/dash/:mediafile_id.mpd</code>、<code>/filmaapi/hls/:mediafile_id.m3u8</code></li>
+<li>ダウンロード入口: <code>/filmaapi/download/:mediafile_id</code></li>
+<li>プレイヤー表示前の拒否: <code>/filmaapi/player/:mediafile_id</code></li>
+<li>期限付きURL、API・埋め込み、会員画面、管理画面の確認操作</li>
+<li>期限切れ、無効な期限付きURL、動画非公開、視聴権不足などによるアクセス拒否</li>
 </ul>
-<h2 id="_3">注意</h2>
+<p><code>/filmaapi/player</code>のHTML表示に成功しただけでは記録しません。認証期限切れ、無効な期限付きURL、動画非公開、視聴権不足などでHTML表示前に拒否された場合は、その時点で1件記録します。正常時は、通常のプレイヤー画面と埋め込みHTML・APIのどの経路でも、実際に取得されるルートMPDまたはHLSマスタープレイリストをプレイヤー入口として1件記録します。HLSの子プレイリスト、ライセンス、動画セグメントは個別のアクセス件数として記録しません。そのため、表示される件数は実際に動画を最後まで再生した回数ではなく、ストリーミングまたはダウンロード入口へアクセスした回数です。</p>
+<p>期限付きURLの残り時間が動画の再生時間に足りず、プレイヤーが再生継続用JWTへ交換した場合も、元の期限付きURL IDを引き継ぎます。後続のルートMPDまたはHLSマスタープレイリスト取得は、元の期限付きURL経由のアクセスとして記録・集計されます。</p>
+<p>結果は次のように区別します。</p>
 <ul>
-<li>有効期限切れ/無効化されたURLはアクセス不可になります</li>
-<li>メモは詳細画面から編集可能</li>
-<li>「メディアファイル情報」の <strong>ダウンロード／ストリーミング</strong> にも「期限付きURL生成」があります
-  （ダウンロード用／ストリーミング用のURLを用途別に発行できます）</li>
+<li>成功: 入口の認証に成功し、ルートMPD／HLSマスタープレイリストを返却、またはダウンロード先へリダイレクト</li>
+<li>失敗: 認証後のルートMPD・HLSマスタープレイリストまたはダウンロード先の生成に失敗</li>
+<li>拒否: 入口の認証、公開状態または視聴権の確認でサーバーがアクセスを拒否</li>
 </ul>
-<h2 id="_4">公開設定との関係（重要）</h2>
+<p>ダウンロードの「成功」は、認証に成功して署名付きダウンロードURLを生成し、リダイレクトしたことを表します。読み取り可能なStorageがなくダウンロード先を生成できない場合は「失敗」として記録します。ブラウザでのキャンセルや保存ダイアログの操作はサーバーから確認できないため、ファイルが実際にクライアント端末へ保存されていない場合も「成功」として記録されます。</p>
+<p>DRM認証、ライセンス取得、動画セグメント読込などの再生エラーは、アクセスログの結果へ反映しません。Filmaサーバーへ到達したWidevine・FairPlayライセンス要求の失敗は、<code>[Filma][DRM_LICENSE_FAILURE]</code>タグ、アクセス先URL、送信元IPアドレスとともに運用者向けのEgalite技術ログへ記録します。URLのクエリはJWT等を含む可能性があるため保存しません。外部ライセンスサーバーへ直接送信されるPlayReady、Filmaサーバーへ到達しない通信エラー、ライセンス発行後にブラウザ内で発生したエラーは記録対象外です。過去に記録済みのプレイヤーエラーは、履歴との互換性のため従来の失敗理由で表示します。</p>
+<h2 id="_3">画面の見方</h2>
 <ul>
-<li>期限付きURLは「URL固有の有効期限」でアクセス可否を制御しますが、元ファイルの公開設定も同時に考慮されます。</li>
-<li>対象ファイルが「公開OFF」または「公開期限切れ（published_untilを過ぎている）」の場合、期限付きURLが有効でもアクセスはできません（404相当）。</li>
-<li>対象ファイルが公開中かつ期限内である必要があります。</li>
-<li>期限付きURLの有効期限を延長・短縮しても、元ファイルの公開期限は自動では変わりません。用途に応じて両者を調整してください。</li>
-<li>既存の期限付きURLがある状態でファイルを非公開にした場合、以後そのURLはアクセス不可になります（ファイルの公開再開で再びアクセス可能）。</li>
+<li>集計カード: 選択期間のアクセス、成功、失敗、拒否、会員認証経由の会員数</li>
+<li>よく見られている動画: 成功した外部アクセスを動画単位で集計</li>
+<li>急激なアクセス増減: 直近24時間とその前24時間を比較</li>
+<li>参照元URL: 動画が貼られているページやアクセス元</li>
+<li>会員別アクセス: 会員認証経由でアクセスした会員</li>
+<li>IP別アクセス: 同じ日・同じ組織内で同一IPから発生したアクセスを集計</li>
+<li>アクセス明細: 種別・認証元・認証方式・結果と理由を「アクセス内容」、リクエストパス・参照元・IPハッシュ・User-Agent・会員を「アクセス元・利用者」にまとめて表示。リクエストパスから<code>/dash</code>、<code>/hls</code>、<code>/player</code>、<code>/download</code>のどの入口へのアクセスかを確認可能</li>
+<li>期限付きURLの識別: 期限付きURL経由の明細には、期限付きURL IDと現在のメモを表示。期限切れ・無効化済みURLも表示対象とし、完全なURLとJWTは表示しない</li>
 </ul>
-<h2 id="_5">アクセス数について</h2>
+<p>管理画面・Platformの確認操作は履歴には保存されますが、通常の集計と明細からは除外されます。Platformだけは「内部操作」で表示範囲を変更できます。Filma管理画面では、パラメータを直接指定した場合も内部操作を表示しません。</p>
+<p>Platformから他組織のファイルを確認した履歴は、JWTを発行したPlatform管理者組織ではなく、確認対象ファイルの組織に紐付けて保存します。</p>
+<h2 id="_4">急増・急減の判定</h2>
 <ul>
-<li>「アクセス数」は既存方式の累計値です。プレイヤー入口以外のマニフェスト取得なども含む可能性があります。</li>
-<li>新しいアクセス履歴は初期リリースでは収集のみを行い、Filma管理画面には表示しません。</li>
-<li>ダウンロード用URLの新しいアクセス履歴は、認証後に署名付きURLへリダイレクトした時点で「成功」になります。ブラウザでキャンセルされた場合など、実際にクライアント端末へ保存されなくても「成功」として記録されます。</li>
+<li>急増: 直近24時間が20件以上で、その前24時間の2倍以上</li>
+<li>急減: その前24時間が20件以上で、直近24時間が半分以下</li>
 </ul>
-<h2 id="_6">検索・フィルタ・再発行の注意点</h2>
+<p>前期間が0件の場合は、直近24時間が20件以上になると急増として表示されます。メール通知は行いません。</p>
+<h2 id="_5">検索・フィルター</h2>
+<p>初期表示は直近7日です。24時間、7日、30日、90日のプリセットと任意期間を利用できます。</p>
+<p>任意期間は1回につき366日以内です。期間をずらすことで、それ以前の履歴も確認できます。</p>
+<p>次の条件で絞り込めます。</p>
 <ul>
-<li>検索はメモ欄に対して行われます。キーワードは部分一致です。</li>
-<li>フィルタは「有効/全件/無効」から選択します。期限切れは「無効」に含まれます。</li>
-<li>再発行は同一メディアで新規にURLを作成します。既存URLは自動では無効化されないため、不要になったURLは「無効にする」を実行してください。</li>
-<li>「URLをコピー」ボタンは完全なURL（トークン付き）をクリップボードにコピーします。共有先の管理にご注意ください。</li>
+<li>組織（Platformのみ）</li>
+<li>ストリーミング／ダウンロード</li>
+<li>認証元</li>
+<li>認証方式（APIキー／JWT／不明）</li>
+<li>成功／失敗／拒否</li>
+<li>参照元ホスト</li>
+<li>IPハッシュ</li>
+<li>ファイル、会員、期限付きURLのID</li>
+<li>内部操作（Platformのみ）</li>
 </ul>
-<hr />
-<h3 id="_7">次にやること / 関連</h3>
+<p>Filma管理画面の全体スイッチを有効にすると、ファイル、会員、期限付きURLの詳細画面から対象に絞り込んで表示できます。アクセス明細の詳細では、保存されているID、認証方式、結果理由、参照元、IPハッシュ、User-Agent、リクエストパスを確認できます。</p>
+<p>認証方式は、アクセスごとに実際に採用された資格情報を表します。APIキーから発行されたJWTであっても、後続リクエストがJWTを使用した場合は「JWT」と表示します。本カラム追加前のログは「不明（既存ログ）」と表示します。</p>
+<h2 id="_6">参照元と会員情報の注意</h2>
 <ul>
-<li>サイト埋め込み（HTML）: <a href="../embed_html/">埋め込みHTML</a></li>
-<li>サイト埋め込み（API）: <a href="../embed_api/">APIを使った埋め込み</a></li>
+<li>Refererが送信されないブラウザや直接アクセスでは、参照元URLを特定できません。</li>
+<li>Refererがない場合はOriginを記録します。</li>
+<li>URLのクエリは記録しますが、JWT、token、code、key、signature、passwordなどの機密値は保存前に伏字化されます。</li>
+<li>会員を特定できるのは会員認証経由のアクセスだけです。期限付きURLや一般API経由では、閲覧者が会員であっても会員情報とは結び付きません。</li>
+<li>生のIPアドレスは保存しません。IPハッシュは組織ごとの秘密鍵とJSTの日付を使って生成するため、同じ組織・同じ日の集中アクセスを把握する用途に限られ、日をまたいだ追跡や組織間の照合はできません。</li>
+<li>IPハッシュ、User-Agent、失敗・拒否理由などの保存済み情報はPlatformとFilma管理画面の双方に表示します。ただし、Filma管理画面は所属組織の外部アクセスに限ります。</li>
+<li>マニフェスト生成失敗は固定の理由コードだけを保存し、サーバーのエラー本文は保存しません。</li>
 </ul>
+<h2 id="url_1">期限付きURLの旧アクセス数</h2>
+<p>従来の「アクセス数」は、ルート以外の配信リクエストを含む可能性があります。初期リリースの期限付きURL画面では従来の値だけを表示します。Filma管理画面の全体スイッチを有効にすると「旧アクセス数（参考）」へ表示名を変え、新履歴の入口件数と分けて表示します。</p>
 
 
 

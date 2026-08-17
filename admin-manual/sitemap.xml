@@ -2,94 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.filma.biz/admin-manual/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
+    </url>
+    <url>
+         <loc>https://docs.filma.biz/admin-manual/accesslog/</loc>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/drm/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/embed_api/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/embed_html/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/embed_wordpress/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/login/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_admin/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_customers/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_entitlements/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_item_sku/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_media/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_operations/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_overview/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_paypal_ipn/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_playback_jwt/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/membership_settings/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/publish/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/roadmap/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/routes_flow/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/signedurl/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/unpublish_delete/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/upload/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/admin-manual/users/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-17</lastmod>
     </url>
 </urlset>

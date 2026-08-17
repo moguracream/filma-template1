@@ -562,7 +562,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ファイルアップロード（未実装）
+        ファイルアップロード
       
     </span>
   </a>
@@ -589,12 +589,12 @@
   <a href="#encode-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Encode API（未実装）
+        Encode API
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Encode API（未実装）">
+    <nav class="md-nav" aria-label="Encode API">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -660,6 +660,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download API
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1297,7 +1308,7 @@
   <a href="#_13" class="md-nav__link">
     <span class="md-ellipsis">
       
-        ファイルアップロード（未実装）
+        ファイルアップロード
       
     </span>
   </a>
@@ -1324,12 +1335,12 @@
   <a href="#encode-api" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Encode API（未実装）
+        Encode API
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Encode API（未実装）">
+    <nav class="md-nav" aria-label="Encode API">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1395,6 +1406,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#download-api" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Download API
+      
+    </span>
+  </a>
   
 </li>
       
@@ -1795,10 +1817,10 @@
 <p><strong>レスポンス例:</strong></p>
 <p><strong>成功時（HTTP 200）</strong></p>
 <pre><code class="language-json">{
-  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9...signature&quot;,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE3MDQwMDcyMDAsImlhdCI6MTcwMzkyMDgwMCwibWVkaWFmaWxlX2lkIjoxMjM0NX0.signature&quot;,
   &quot;token_type&quot;: &quot;Bearer&quot;,
-  &quot;expires_in&quot;: 7200,
-  &quot;expires_at&quot;: 1703928000,
+  &quot;expires_in&quot;: 86400,
+  &quot;expires_at&quot;: 1704007200,
   &quot;user_id&quot;: 1,
   &quot;organization_id&quot;: 1,
   &quot;api_type&quot;: &quot;readonly&quot;,
@@ -1813,7 +1835,7 @@
   &quot;auth_method&quot;: &quot;api_key&quot;,
   &quot;mediafile_id&quot;: 12345,
   &quot;iat&quot;: 1703920800,
-  &quot;exp&quot;: 1703928000
+  &quot;exp&quot;: 1704007200
 }
 </code></pre>
 <table>
@@ -1971,10 +1993,10 @@
 <p><strong>レスポンス例:</strong></p>
 <p><strong>成功時（HTTP 200）</strong></p>
 <pre><code class="language-json">{
-  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9...new_signature&quot;,
+  &quot;token&quot;: &quot;eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJvcmdhbml6YXRpb25faWQiOjEsImV4cCI6MTcwNDAwNzIwMCwiaWF0IjoxNzAzOTIwODAwfQ.new_signature&quot;,
   &quot;token_type&quot;: &quot;Bearer&quot;,
-  &quot;expires_in&quot;: 3600,
-  &quot;expires_at&quot;: 1703924400,
+  &quot;expires_in&quot;: 86400,
+  &quot;expires_at&quot;: 1704093600,
   &quot;user_id&quot;: 1,
   &quot;organization_id&quot;: 1,
   &quot;api_type&quot;: &quot;readonly&quot;
@@ -3076,7 +3098,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 </tr>
 </tbody>
 </table>
-<h4 id="_13">ファイルアップロード（未実装）</h4>
+<h4 id="_13">ファイルアップロード</h4>
 <pre><code>POST /filmaapi/storage
 </code></pre>
 <p><strong>権限:</strong> fullaccess権限が必要</p>
@@ -3188,7 +3210,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 <li>削除されたファイルは、通常のAPI呼び出しでは取得できなくなります</li>
 <li>削除されたファイルは、配信対象外として扱われます</li>
 </ul>
-<h3 id="encode-api">Encode API（未実装）</h3>
+<h3 id="encode-api">Encode API</h3>
 <p>動画エンコーディングの管理を行います。</p>
 <p><em>注: 以下のエンドポイントは現在未実装です。</em></p>
 <h4 id="_15">エンコード状況取得</h4>
@@ -3264,9 +3286,62 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 <ul>
 <li>デフォルトでは公開されたファイルのみアクセス可能</li>
 <li><code>show_all=true</code>かつfullaccess権限の場合、非公開ファイルもアクセス可能</li>
+<li>HTMLプレイヤー画面の返却成功はアクセスログへ記録されません。認証・公開状態・視聴権の確認で拒否された場合だけ、<code>player</code>種別の拒否ログとして記録されます</li>
+<li>期限付きURLから再生継続用JWTへ交換した場合は、元の期限付きURL IDを引き継ぎ、後続のルートMPD/HLSアクセスを期限付きURL経由として記録します</li>
+</ul>
+<h3 id="download-api">Download API</h3>
+<p>ファイルのダウンロード先となる署名付きURLへリダイレクトします。</p>
+<pre><code>GET /filmaapi/download/{id}
+</code></pre>
+<p><strong>パラメータ:</strong></p>
+<table>
+<thead>
+<tr>
+<th>パラメータ名</th>
+<th>型</th>
+<th>必須</th>
+<th>デフォルト</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>api_key</td>
+<td>string</td>
+<td>*</td>
+<td>-</td>
+<td>APIキー（JWT認証時は不要）</td>
+</tr>
+<tr>
+<td>jwt</td>
+<td>string</td>
+<td>*</td>
+<td>-</td>
+<td>JWTトークン（APIキー認証時は不要）</td>
+</tr>
+<tr>
+<td>id</td>
+<td>integer</td>
+<td>✓</td>
+<td>-</td>
+<td>メディアファイルID</td>
+</tr>
+</tbody>
+</table>
+<p><strong>認証:</strong> APIキー認証、JWT認証、またはCookie認証のいずれか</p>
+<p><strong>レスポンス:</strong></p>
+<ul>
+<li>認証成功時は署名付きダウンロードURLへのHTTP 302リダイレクト</li>
+</ul>
+<p><strong>アクセスログ:</strong></p>
+<ul>
+<li>署名付きダウンロードURLを生成し、HTTP 302リダイレクトを確定した時点で<code>download</code>種別の「成功」として記録されます</li>
+<li>読み取り可能なStorageがなくダウンロード先を生成できない場合は「失敗」として記録されます</li>
+<li>ブラウザでのキャンセルや保存ダイアログの操作はサーバーから確認できないため、ファイルが実際にクライアント端末へ保存されていない場合も「成功」として記録されます</li>
 </ul>
 <h3 id="dash-api">DASH API</h3>
 <p>DASH形式での動画配信を行います。</p>
+<p>ルートMPDのGETは、通常のプレイヤー画面と埋め込みHTML・APIのどの経路でもプレイヤー入口として1件記録されます。<code>/filmaapi/player</code>はHTML表示成功を記録せず、マニフェストへ到達する前の拒否だけを記録します。</p>
 <h4 id="dash">DASH配信</h4>
 <pre><code>GET /filmaapi/dash/{id}.mpd
 </code></pre>
@@ -3325,6 +3400,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 </ul>
 <h3 id="hls-api">HLS API</h3>
 <p>HLS形式での動画配信を行います。</p>
+<p>ルートのHLSマスタープレイリストGETは、通常のプレイヤー画面と埋め込みHTML・APIのどの経路でもプレイヤー入口として1件記録されます。<code>/filmaapi/player</code>のHTML表示成功、HLSメディアプレイリスト、HEADは記録対象外です。</p>
 <h4 id="hls">HLS配信</h4>
 <pre><code>GET /filmaapi/hls/{id}.m3u8
 </code></pre>
@@ -3476,6 +3552,7 @@ curl -H &quot;X-Api-Key: your_api_key&quot; \
 <h3 id="drm-api">DRMライセンス API</h3>
 <p>DRM（Widevine/FairPlay/PlayReady）ライセンスの取得を行います。
 Filma APIキー認証またはJWT認証が必要です。</p>
+<p>Widevine・FairPlayライセンス要求がFilmaサーバー内で失敗した場合は、<code>[Filma][DRM_LICENSE_FAILURE]</code>タグ、DRM方式、処理段階、固定理由コード、HTTP状態、認証済みのMediafile・組織・会員ID、アクセス先URL、送信元IPアドレスをEgalite技術ログへ記録します。JWT、APIキー、ライセンス要求・応答本文、URLのクエリ文字列は記録しません。DRM失敗はアクセス解析の成否には反映しません。現在のプレイヤーが外部ライセンスサーバーへ直接要求するPlayReadyと、Filmaサーバーへ到達しないクライアント側エラーは記録対象外です。</p>
 <p><strong>JWTのmediafile_idについて（DRMライセンス共通）:</strong></p>
 <ul>
 <li>JWTに<code>mediafile_id</code>が含まれている場合は、原則として同一IDのメディアのみ許可されます</li>
