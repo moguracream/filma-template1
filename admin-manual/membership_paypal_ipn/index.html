@@ -1512,22 +1512,22 @@
 以下では、わかりやすさのためAPIキーの例に加えて、JWTの例も併記します。</p>
 <h3 id="jwt">JWT認証（推奨）の準備</h3>
 <p>まずAPIキーでJWTトークンを発行し、そのトークンを以後のAPI呼び出しで利用します。</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://filma.biz/filmaapi/token&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-KEY: &lt;APIキー&gt;&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://filma.biz/filmaapi/token"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-KEY: &lt;APIキー&gt;"</span>
 </code></pre></div>
 <p>レスポンスの <code>token</code> を取り出し、以降のリクエストで以下のように渡します。</p>
-<div class="highlight"><pre><span></span><code>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;JWTトークン&gt;&quot;</span>
+<div class="highlight"><pre><span></span><code>-H<span class="w"> </span><span class="s2">"Authorization: Bearer &lt;JWTトークン&gt;"</span>
 </code></pre></div>
 <h3 id="payer_email">会員の検索（payer_emailで照合）</h3>
 <p>まず、IPNで受け取った <code>payer_email</code> に一致するFilma会員が既に存在するかを確認します。
 会員一覧APIはメールアドレスの部分一致検索に対応しているため、完全一致させたい場合は <code>query</code> にメール全体を渡します。</p>
 <p><strong>APIキー認証の例（簡易）</strong>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://filma.biz/filmaapi/customers?status=enabled&amp;query=buyer%40example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-KEY: &lt;APIキー&gt;&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://filma.biz/filmaapi/customers?status=enabled&amp;query=buyer%40example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-KEY: &lt;APIキー&gt;"</span>
 </code></pre></div></p>
 <p><strong>JWT認証の例（推奨）</strong>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">&quot;https://filma.biz/filmaapi/customers?status=enabled&amp;query=buyer%40example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;JWTトークン&gt;&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://filma.biz/filmaapi/customers?status=enabled&amp;query=buyer%40example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer &lt;JWTトークン&gt;"</span>
 </code></pre></div></p>
 <ul>
 <li><code>query</code>: 検索文字列（メールアドレスはURLエンコードします）</li>
@@ -1539,18 +1539,18 @@
 <h3 id="_3">会員が存在しない場合の作成</h3>
 <p>Filma会員作成APIを使います（現行仕様では <code>email</code> と <code>name</code> が必須です。氏名を運用しない場合はメールアドレスなどを代入してください）。</p>
 <p><strong>APIキー認証の例（簡易）</strong>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://filma.biz/filmaapi/customers&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-KEY: &lt;APIキー&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;email=buyer@example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;name=buyer@example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;notes=PayPal購入で自動作成&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://filma.biz/filmaapi/customers"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-KEY: &lt;APIキー&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"email=buyer@example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"name=buyer@example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"notes=PayPal購入で自動作成"</span>
 </code></pre></div></p>
 <p><strong>JWT認証の例（推奨）</strong>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">&quot;https://filma.biz/filmaapi/customers&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;JWTトークン&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;email=buyer@example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;name=buyer@example.com&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;notes=PayPal購入で自動作成&quot;</span>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s2">"https://filma.biz/filmaapi/customers"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer &lt;JWTトークン&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"email=buyer@example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"name=buyer@example.com"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"notes=PayPal購入で自動作成"</span>
 </code></pre></div></p>
 <p>レスポンスの <code>customer.id</code> がFilma会員IDです。</p>
 <h3 id="_4">視聴権の付与</h3>
@@ -1565,23 +1565,23 @@
 </ul>
 <p><strong>APIキー認証の例（簡易）</strong>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;https://filma.biz/filmaapi/customers/entitlements/1234?scope_type=item&amp;item_id=5678&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;X-API-KEY: &lt;APIキー&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;starts_at=&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;expires_at=&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;status=active&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;source=paypal&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;notes=PayPal IPN&quot;</span>
+<span class="w">  </span><span class="s2">"https://filma.biz/filmaapi/customers/entitlements/1234?scope_type=item&amp;item_id=5678"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"X-API-KEY: &lt;APIキー&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"starts_at="</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"expires_at="</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"status=active"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"source=paypal"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"notes=PayPal IPN"</span>
 </code></pre></div></p>
 <p><strong>JWT認証の例（推奨）</strong>
 <div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="se">\</span>
-<span class="w">  </span><span class="s2">&quot;https://filma.biz/filmaapi/customers/entitlements/1234?scope_type=item&amp;item_id=5678&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-H<span class="w"> </span><span class="s2">&quot;Authorization: Bearer &lt;JWTトークン&gt;&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;starts_at=&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;expires_at=&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;status=active&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;source=paypal&quot;</span><span class="w"> </span><span class="se">\</span>
-<span class="w">  </span>-d<span class="w"> </span><span class="s2">&quot;notes=PayPal IPN&quot;</span>
+<span class="w">  </span><span class="s2">"https://filma.biz/filmaapi/customers/entitlements/1234?scope_type=item&amp;item_id=5678"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-H<span class="w"> </span><span class="s2">"Authorization: Bearer &lt;JWTトークン&gt;"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"starts_at="</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"expires_at="</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"status=active"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"source=paypal"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>-d<span class="w"> </span><span class="s2">"notes=PayPal IPN"</span>
 </code></pre></div></p>
 <h2 id="_5">運用チェックリスト</h2>
 <ul>
