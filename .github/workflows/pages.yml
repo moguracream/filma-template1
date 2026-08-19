@@ -10,6 +10,8 @@ on:
       - 'template-no-auth/**'
       - 'index.html'
       - 'lp/**'
+      - 'assets/**'
+      - 'contact/**'
       - 'CNAME'
       - '*.md'
       - '_config.yml'
@@ -23,6 +25,10 @@ on:
       - 'template-no-auth/**'
       - 'index.html'
       - 'lp/**'
+      - 'assets/**'
+      - 'contact/**'
+      - 'scripts/test-contact-redirect.mjs'
+      - 'scripts/test-homepage-pricing.mjs'
       - 'CNAME'
       - '*.md'
       - '_config.yml'
@@ -42,6 +48,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Test static pages
+        run: |
+          node scripts/test-contact-redirect.mjs
+          node scripts/test-homepage-pricing.mjs
 
       - name: Check docs source
         id: docs-source
@@ -108,6 +124,14 @@ jobs:
           # Landing page assets (absolute /lp/... paths in index.html rely on this).
           if [ -d lp ]; then
             cp -a lp publish/lp
+          fi
+
+          # Contact redirect endpoint and its JavaScript module.
+          if [ -d contact ]; then
+            cp -a contact publish/contact
+          fi
+          if [ -d assets ]; then
+            cp -a assets publish/assets
           fi
 
           find . -maxdepth 1 -type f -name '*.md' \
