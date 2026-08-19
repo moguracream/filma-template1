@@ -14,6 +14,8 @@ export const DEFAULT_CLICK_ID_NAMES = Object.freeze([
   "wbraid",
   "dclid",
   "gclsrc",
+  "gad_source",
+  "gad_campaignid",
 ]);
 
 const UTM_VALUE_PATTERN = /^[A-Za-z0-9._-]+$/;

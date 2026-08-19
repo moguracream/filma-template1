@@ -10,7 +10,7 @@ async function loadModule() {
 test("keeps valid manual campaign parameters and Google click IDs", async () => {
   const { sanitizeAttribution } = await loadModule();
   const result = sanitizeAttribution(
-    "?utm_source=google&utm_medium=cpc&utm_campaign=filma_search_general_202609_drm&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gbraid=GBR.456&wbraid=WBR~789&dclid=DCL_123&gclsrc=aw.ds&email=person%40example.com&next=https%3A%2F%2Fevil.example",
+    "?utm_source=google&utm_medium=cpc&utm_campaign=filma_search_general_202609_drm&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gbraid=GBR.456&wbraid=WBR~789&dclid=DCL_123&gclsrc=aw.ds&gad_source=1&gad_campaignid=1234567890&email=person%40example.com&next=https%3A%2F%2Fevil.example",
   );
 
   assert.deepEqual(result.utm, {
@@ -28,6 +28,8 @@ test("keeps valid manual campaign parameters and Google click IDs", async () => 
     wbraid: "WBR~789",
     dclid: "DCL_123",
     gclsrc: "aw.ds",
+    gad_source: "1",
+    gad_campaignid: "1234567890",
   });
   assert.equal(result.flowCode, "responsive_ad_a");
   assert.equal(result.params.has("email"), false);
