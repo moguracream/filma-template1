@@ -4,12 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Filma for IP Holders | 大切な作品を、守りながら、ファンへ直接。</title>
-  <meta name="description" content="アニメ・映像などのIPホルダー向け動画配信基盤。大手動画配信サービスと同水準のコピーガードで作品を保護しながら、公式配信・ファンクラブ・単品販売を自社で運営できます。20年のプレミアムコンテンツ配信実績。">
+  <meta name="description" content="アニメ・映像などのIPホルダー向け動画配信基盤。業界標準のマルチDRMに対応し、作品を保護しながら公式配信・ファンクラブ・単品販売を自社で運営できます。20年のプレミアムコンテンツ配信実績。">
   <meta property="og:title" content="Filma for IP Holders | 大切な作品を、守りながら、ファンへ直接。">
-  <meta property="og:description" content="大手動画配信サービスと同水準のコピーガードで作品を保護しながら、公式配信を自社で運営できます。">
+  <meta property="og:description" content="業界標準のマルチDRMに対応し、作品を保護しながら公式配信を自社で運営できます。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://docs.filma.biz/lp/ip/">
-  <!-- 計測タグはここに挿入 (未導入) -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KZJ2QN1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1KZJ2QN1S7');
+  </script>
   <link rel="stylesheet" href="/lp/assets/lp-common.css">
   <link rel="stylesheet" href="/lp/assets/theme-ip.css">
 </head>
@@ -23,7 +30,7 @@
       <a href="#business">配信のかたち</a>
       <a href="#trust">実績</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-small" href="#contact">導入のご相談</a>
+      <a class="btn btn-primary btn-small" href="/contact/?contact_flow=ip_header&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
     </nav>
   </div>
 </header>
@@ -34,9 +41,9 @@
   <section class="hero">
     <div class="container">
       <h1>大切な作品を、守りながら、<br>ファンへ直接。</h1>
-      <p class="lead">Filmaは、20年にわたり数十億円相当のプレミアムコンテンツを配信してきた、完全国産の動画配信基盤です。大手動画配信サービスと同水準のコピーガードで作品を保護しながら、公式配信・ファンクラブ・単品販売を自社の手で運営できます。</p>
+      <p class="lead">Filmaは、20年にわたり数十億円相当のプレミアムコンテンツを配信してきた、完全国産の動画配信基盤です。業界標準のマルチDRMに対応し、作品を保護しながら、公式配信・ファンクラブ・単品販売を自社の手で運営できます。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#contact">導入のご相談(無料)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=ip_hero&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
         <a class="btn btn-ghost" href="#protection">保護の仕組みを見る</a>
       </div>
       <p class="hero-note">お申し込みは現在紹介制です。まずはご相談ください。</p>
@@ -71,7 +78,7 @@
   <section class="section" id="protection">
     <div class="container">
       <h2 class="section-title">作品を守る仕組み</h2>
-      <p class="section-lead">Filmaのコピーガードは、大手動画配信サービスでも採用されている業界標準の保護技術です。専門知識は不要で、アップロードするだけで自動的に適用されます。</p>
+      <p class="section-lead">Filmaは、Widevine・FairPlay・PlayReadyの業界標準マルチDRMに対応しています。専門知識は不要で、アップロードするだけで自動的に適用されます。</p>
       <div class="steps">
         <div class="step">
           <h3>アップロードで自動暗号化</h3>
@@ -79,11 +86,11 @@
         </div>
         <div class="step">
           <h3>視聴者ごとに再生を許可</h3>
-          <p>許可された視聴者の端末にだけ、再生のための鍵が発行されます。会員・購入者以外は再生できません。</p>
+          <p>有効な視聴権限を確認できた環境に、再生のための鍵を発行します。認証情報の共有まで完全に防ぐものではありません。</p>
         </div>
         <div class="step">
-          <h3>コピー・保存をブロック</h3>
-          <p>不正なコピーやダウンロード保存を防ぎます。パソコン・スマホ・タブレットの主要な環境に対応しています。</p>
+          <h3>不正取得・再配布を難しく</h3>
+          <p>DRMによってストリーミング動画の直接取得や、そのままの再配布を難しくします。画面撮影や外部機器による録画を完全に防ぐものではありません。ダウンロードにはDRMが適用されません。</p>
         </div>
       </div>
     </div>
@@ -152,26 +159,44 @@
             <tr>
               <th>プラン</th>
               <th>年額</th>
-              <th>転送量</th>
+              <th>年間転送量</th>
               <th>保存容量</th>
-              <th>機能</th>
+              <th>主な用途・機能</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><strong>Standard</strong></td>
               <td class="price">¥498,000</td>
-              <td>10TB</td>
-              <td>10TB</td>
-              <td>コピーガードなし / 無料配信可 / 有料配信可 / 会員制配信可</td>
+              <td>12TB／年</td>
+              <td>1TB</td>
+              <td>DRMを必要としない限定配信・会員制配信</td>
             </tr>
             <tr>
               <td><strong>Pro</strong></td>
               <td class="price">¥980,000</td>
-              <td>50TB</td>
-              <td>50TB</td>
-              <td>コピーガード対応 / 無料配信可 / 有料配信可 / 会員制配信可</td>
+              <td>50TB／年</td>
+              <td>5TB</td>
+              <td>有料映像・IP・プレミアムコンテンツのマルチDRM配信</td>
             </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="pricing-subtitle">追加料金</h3>
+      <div class="pricing-scroll">
+        <table class="pricing-table pricing-options">
+          <thead>
+            <tr>
+              <th>追加項目</th>
+              <th>Standard</th>
+              <th>Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>転送量 ＋5TB／年</td><td>¥100,000</td><td>¥80,000</td></tr>
+            <tr><td>転送量 ＋10TB／年</td><td>¥180,000</td><td>¥150,000</td></tr>
+            <tr><td>保存容量 ＋500GB</td><td>¥60,000／年</td><td>¥50,000／年</td></tr>
+            <tr><td>保存容量 ＋1TB</td><td>¥100,000／年</td><td>¥80,000／年</td></tr>
           </tbody>
         </table>
       </div>
@@ -179,7 +204,7 @@
         <li>※ 作品の保護(コピーガード)が必要な場合は、Proプランをお選びください。</li>
         <li>※ ご試用の期間中に限り、半年まで完全無料でご利用いただけます。半年以内でも本番稼働後は有料となります。</li>
         <li>※ 銀行振込をご希望の方は、年額プラン(先払い・解約不可)でのご契約に限らせていただきます。月額プランをご希望の方は、クレジットカード決済をご利用ください。</li>
-        <li>※ 転送量・保存容量が超過した場合は、別途、追加費用を頂きます。詳細はご相談ください。</li>
+        <li>※ 転送量・保存容量の追加枠は、契約期間中にお申し込みいただけます。</li>
       </ul>
     </div>
   </section>
@@ -191,7 +216,7 @@
       <div class="faq-list">
         <details>
           <summary>コピーガードとは、どのような仕組みですか?</summary>
-          <p>映像を暗号化し、許可された視聴者の端末にだけ再生の鍵を渡す仕組みです。大手動画配信サービスでも採用されている業界標準の保護技術で、不正なコピーやダウンロード保存を防ぎます。</p>
+          <p>映像を暗号化し、許可された視聴者の端末にだけ再生の鍵を渡す仕組みです。ストリーミング動画の直接取得や、そのままの再配布を難しくしますが、画面撮影や外部機器による録画まで完全に防ぐものではありません。</p>
         </details>
         <details>
           <summary>海外のファンも視聴できますか?</summary>
@@ -219,7 +244,7 @@
       <h2>作品の話を、聞かせてください。</h2>
       <p>現在ローンチ直後のため、お申し込みは原則として紹介制とさせていただいております。作品の保護方針や配信企画に応じて、最適な構成をご提案します。まずはお気軽にご相談ください。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://cream.co.jp/">導入のご相談(株式会社クリーム)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=ip_footer&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
       </div>
     </div>
   </section>
@@ -236,15 +261,13 @@
           <li><a href="https://docs.filma.biz/admin-manual/">管理画面マニュアル</a></li>
         </ul>
       </div>
-      <!-- Temporarily hidden: cross-use-case footer links.
       <div>
-        <h3>他の用途で探す</h3>
+        <h3>用途別に見る</h3>
         <ul>
           <li><a href="/">開発者・開発会社の方へ</a></li>
           <li><a href="/lp/elearning/">eラーニング・社内研修での利用</a></li>
         </ul>
       </div>
-      -->
       <div>
         <h3>規約・提供会社</h3>
         <ul>
@@ -257,6 +280,16 @@
     <div class="footer-copy">Filma — 動画配信プラットフォーム / 提供: 株式会社クリーム</div>
   </div>
 </footer>
+
+<script type="module">
+  import { preserveAttributionOnContactLinks } from "/assets/js/contact-redirect.mjs";
+
+  preserveAttributionOnContactLinks({
+    document,
+    location,
+    sessionStorage: window.sessionStorage,
+  });
+</script>
 
 </body>
 </html>

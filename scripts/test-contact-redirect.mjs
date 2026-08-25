@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 const moduleUrl = new URL("../assets/js/contact-redirect.mjs", import.meta.url);
@@ -6,6 +7,104 @@ const moduleUrl = new URL("../assets/js/contact-redirect.mjs", import.meta.url);
 async function loadModule() {
   return import(moduleUrl.href);
 }
+
+test("routes every LP inquiry CTA through /contact with a stable flow code", async () => {
+  const pages = [
+    {
+      path: new URL("../index.html", import.meta.url),
+      flows: ["developer_header", "developer_hero", "developer_footer"],
+    },
+    {
+      path: new URL("../lp/ip/index.html", import.meta.url),
+      flows: ["ip_header", "ip_hero", "ip_footer"],
+    },
+    {
+      path: new URL("../lp/elearning/index.html", import.meta.url),
+      flows: ["elearning_header", "elearning_hero", "elearning_footer"],
+    },
+  ];
+
+  for (const page of pages) {
+    const html = await readFile(page.path, "utf8");
+    assert.equal(
+      html.split("data-contact-link").length - 1,
+      page.flows.length,
+      `${page.path.pathname} must mark every inquiry CTA for attribution`,
+    );
+    assert.ok(
+      html.includes("G-1KZJ2QN1S7"),
+      `${page.path.pathname} must load the Filma GA4 property`,
+    );
+    for (const flow of page.flows) {
+      assert.ok(
+        html.includes(
+          `href="/contact/?contact_flow=${flow}&amp;contact_market=general" data-contact-link`,
+        ),
+        `${page.path.pathname} is missing contact flow ${flow}`,
+      );
+    }
+  }
+});
+
+test("accepts only known LP flow codes and safe traffic context", async () => {
+  const { sanitizeContactContext } = await loadModule();
+  const valid = sanitizeContactContext(
+    "?contact_flow=ip_hero&contact_source=prtimes.jp&contact_medium=referral&contact_market=general&email=person%40example.com",
+  );
+
+  assert.deepEqual(valid.values, {
+    contact_flow: "ip_hero",
+    contact_source: "prtimes.jp",
+    contact_medium: "referral",
+    contact_market: "general",
+  });
+  assert.equal(valid.lp, "ip");
+  assert.equal(valid.cta, "hero");
+  assert.equal(valid.params.has("email"), false);
+
+  const invalid = sanitizeContactContext(
+    "?contact_flow=unknown_footer&contact_source=https%3A%2F%2Fevil.example%2Fx&contact_medium=paid%20search&contact_market=private",
+  );
+  assert.deepEqual(invalid.values, {});
+});
+
+test("builds a sheet-readable management code from LP and acquisition data", async () => {
+  const {
+    buildContactManagementCode,
+    sanitizeAttribution,
+    sanitizeContactContext,
+  } = await loadModule();
+  const attribution = sanitizeAttribution(
+    "?utm_source=google&utm_medium=cpc&utm_campaign=filma_search_general_202609_drm&utm_content=responsive_ad_a",
+  );
+  const contact = sanitizeContactContext(
+    "?contact_flow=elearning_footer&contact_source=google&contact_medium=cpc&contact_market=general",
+  );
+
+  assert.equal(
+    buildContactManagementCode(contact, attribution),
+    "lp=elearning|cta=footer|source=google|medium=cpc|campaign=filma_search_general_202609_drm|content=responsive_ad_a|market=general",
+  );
+});
+
+test("uses available Ads campaign identifiers when a campaign name is absent", async () => {
+  const {
+    buildContactManagementCode,
+    sanitizeAttribution,
+    sanitizeContactContext,
+  } = await loadModule();
+  const attribution = sanitizeAttribution(
+    "?gclid=GoogleClick_123&gad_campaignid=987654321",
+  );
+  const contact = sanitizeContactContext(
+    "?contact_flow=developer_header&contact_source=google&contact_medium=cpc&contact_market=general",
+  );
+
+  assert.equal(
+    buildContactManagementCode(contact, attribution),
+    "lp=developer|cta=header|source=google|medium=cpc|campaign=987654321|content=none|market=general",
+  );
+});
 
 test("keeps valid manual campaign parameters and Google click IDs", async () => {
   const { sanitizeAttribution } = await loadModule();
@@ -80,12 +179,13 @@ test("does not retain disabled platform click IDs unless explicitly enabled", as
   });
 });
 
-test("preserves only valid attribution on every homepage contact link", async () => {
+test("preserves each CTA flow code while carrying valid acquisition data", async () => {
   const { preserveAttributionOnContactLinks } = await loadModule();
-  const links = Array.from({ length: 3 }, () => ({
-    href: "https://docs.filma.biz/contact/",
+  const links = ["header", "hero", "footer"].map((cta) => ({
+    href: `https://docs.filma.biz/contact/?contact_flow=developer_${cta}&contact_market=general`,
   }));
   const document = {
+    referrer: "https://www.google.com/search?q=filma",
     querySelectorAll(selector) {
       assert.equal(selector, "[data-contact-link]");
       return links;
@@ -95,17 +195,178 @@ test("preserves only valid attribution on every homepage contact link", async ()
   preserveAttributionOnContactLinks({
     document,
     location: {
+      href: "https://docs.filma.biz/",
+      hostname: "docs.filma.biz",
       search:
         "?utm_source=google&utm_medium=cpc&utm_campaign=filma_sales_general_202608&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gad_source=1&gad_campaignid=1234567890&email=person%40example.com&next=https%3A%2F%2Fevil.example",
     },
   });
 
-  const expectedUrl =
-    "https://docs.filma.biz/contact/?utm_source=google&utm_medium=cpc&utm_campaign=filma_sales_general_202608&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gad_source=1&gad_campaignid=1234567890";
   assert.deepEqual(
     links.map((link) => link.href),
-    [expectedUrl, expectedUrl, expectedUrl],
+    ["header", "hero", "footer"].map(
+      (cta) =>
+        `https://docs.filma.biz/contact/?contact_flow=developer_${cta}&contact_source=google&contact_medium=cpc&contact_market=general&utm_source=google&utm_medium=cpc&utm_campaign=filma_sales_general_202608&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gad_source=1&gad_campaignid=1234567890`,
+    ),
   );
+});
+
+test("keeps the original external referrer across internal LP navigation", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const values = new Map();
+  const sessionStorage = {
+    getItem(key) {
+      return values.get(key) || null;
+    },
+    setItem(key, value) {
+      values.set(key, value);
+    },
+  };
+  const firstLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_hero&contact_market=general",
+  };
+
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://prtimes.jp/main/html/rd/p/000000001.000000001.html",
+      querySelectorAll() {
+        return [firstLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/ip/",
+      hostname: "docs.filma.biz",
+      search: "",
+    },
+    sessionStorage,
+  });
+
+  assert.equal(new URL(firstLink.href).searchParams.get("contact_source"), "prtimes.jp");
+  assert.equal(new URL(firstLink.href).searchParams.get("contact_medium"), "referral");
+
+  const secondLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=elearning_footer&contact_market=general",
+  };
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://docs.filma.biz/lp/ip/",
+      querySelectorAll() {
+        return [secondLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/elearning/",
+      hostname: "docs.filma.biz",
+      search: "",
+    },
+    sessionStorage,
+  });
+
+  assert.equal(new URL(secondLink.href).searchParams.get("contact_source"), "prtimes.jp");
+  assert.equal(new URL(secondLink.href).searchParams.get("contact_medium"), "referral");
+});
+
+test("does not let same-origin UTM tags overwrite stored acquisition", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const values = new Map();
+  const sessionStorage = {
+    getItem(key) {
+      return values.get(key) || null;
+    },
+    setItem(key, value) {
+      values.set(key, value);
+    },
+  };
+  const landingLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=developer_hero&contact_market=general",
+  };
+
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://www.google.com/",
+      querySelectorAll() {
+        return [landingLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/?utm_source=google&utm_medium=cpc&gclid=Original_123",
+      hostname: "docs.filma.biz",
+      search: "?utm_source=google&utm_medium=cpc&gclid=Original_123",
+    },
+    sessionStorage,
+  });
+
+  const internalLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_footer&contact_market=general",
+  };
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://docs.filma.biz/",
+      querySelectorAll() {
+        return [internalLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/ip/?utm_source=internal&utm_medium=navigation",
+      hostname: "docs.filma.biz",
+      search: "?utm_source=internal&utm_medium=navigation",
+    },
+    sessionStorage,
+  });
+
+  const url = new URL(internalLink.href);
+  assert.equal(url.searchParams.get("utm_source"), "google");
+  assert.equal(url.searchParams.get("utm_medium"), "cpc");
+  assert.equal(url.searchParams.get("gclid"), "Original_123");
+  assert.equal(url.searchParams.has("navigation"), false);
+});
+
+test("honors an explicitly mapped special-market CTA", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const link = {
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_footer&contact_market=special",
+  };
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "",
+      querySelectorAll() {
+        return [link];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/ip/",
+      hostname: "docs.filma.biz",
+      search: "",
+    },
+  });
+
+  assert.equal(new URL(link.href).searchParams.get("contact_market"), "special");
+});
+
+test("classifies Google Ads click IDs when manual UTM parameters are absent", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const link = {
+    href: "https://docs.filma.biz/contact/?contact_flow=developer_hero&contact_market=general",
+  };
+
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "",
+      querySelectorAll() {
+        return [link];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/?gclid=GoogleClick_123",
+      hostname: "docs.filma.biz",
+      search: "?gclid=GoogleClick_123",
+    },
+  });
+
+  const url = new URL(link.href);
+  assert.equal(url.searchParams.get("contact_source"), "google");
+  assert.equal(url.searchParams.get("contact_medium"), "cpc");
+  assert.equal(url.searchParams.get("gclid"), "GoogleClick_123");
 });
 
 test("builds a sanitized page URL and a form URL that receives only the management code", async () => {
@@ -230,7 +491,7 @@ function createBrowserHarness(search) {
 test("initializes GA4 with the sanitized page URL before redirecting", async () => {
   const { startContactRedirect } = await loadModule();
   const harness = createBrowserHarness(
-    "?utm_source=google&utm_medium=cpc&utm_campaign=filma_search_general_202609_drm&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&next=https%3A%2F%2Fevil.example",
+    "?contact_flow=ip_hero&contact_source=google&contact_medium=cpc&contact_market=general&utm_source=google&utm_medium=cpc&utm_campaign=filma_search_general_202609_drm&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&next=https%3A%2F%2Fevil.example",
   );
 
   const result = startContactRedirect({
@@ -243,10 +504,11 @@ test("initializes GA4 with the sanitized page URL before redirecting", async () 
   });
 
   assert.equal(result.sanitizedPageUrl.includes("gclid=AbC_123-xy"), true);
+  assert.equal(result.sanitizedPageUrl.includes("contact_flow=ip_hero"), true);
   assert.equal(result.sanitizedPageUrl.includes("next="), false);
   assert.equal(
-    result.formUrl,
-    "https://docs.google.com/forms/d/e/1FAIpQLSfTXvyTcaS_pHkpMvy8TqeNQpWhyQmFEopaFoI81n2swGNjmA/viewform?usp=pp_url&entry.1442019456=responsive_ad_a",
+    new URL(result.formUrl).searchParams.get("entry.1442019456"),
+    "lp=ip|cta=hero|source=google|medium=cpc|campaign=filma_search_general_202609_drm|content=responsive_ad_a|market=general",
   );
   assert.equal(harness.manualLink.href, result.formUrl);
   assert.deepEqual(harness.order, [
@@ -266,6 +528,16 @@ test("initializes GA4 with the sanitized page URL before redirecting", async () 
   );
   assert.equal(harness.gtagCalls[2][0], "event");
   assert.equal(harness.gtagCalls[2][1], "contact_redirect");
+  assert.equal(harness.gtagCalls[2][2].contact_flow, "ip_hero");
+  assert.equal(harness.gtagCalls[2][2].contact_lp, "ip");
+  assert.equal(harness.gtagCalls[2][2].contact_cta, "hero");
+  assert.equal(harness.gtagCalls[2][2].contact_source, "google");
+  assert.equal(harness.gtagCalls[2][2].contact_medium, "cpc");
+  assert.equal(
+    harness.gtagCalls[2][2].contact_campaign,
+    "filma_search_general_202609_drm",
+  );
+  assert.equal(harness.gtagCalls[2][2].contact_market, "general");
   assert.equal(harness.gtagCalls[2][2].event_timeout, 1000);
   assert.equal(harness.gtagCalls[2][2].transport_type, "beacon");
 });
