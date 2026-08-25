@@ -80,6 +80,34 @@ test("does not retain disabled platform click IDs unless explicitly enabled", as
   });
 });
 
+test("preserves only valid attribution on every homepage contact link", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const links = Array.from({ length: 3 }, () => ({
+    href: "https://docs.filma.biz/contact/",
+  }));
+  const document = {
+    querySelectorAll(selector) {
+      assert.equal(selector, "[data-contact-link]");
+      return links;
+    },
+  };
+
+  preserveAttributionOnContactLinks({
+    document,
+    location: {
+      search:
+        "?utm_source=google&utm_medium=cpc&utm_campaign=filma_sales_general_202608&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gad_source=1&gad_campaignid=1234567890&email=person%40example.com&next=https%3A%2F%2Fevil.example",
+    },
+  });
+
+  const expectedUrl =
+    "https://docs.filma.biz/contact/?utm_source=google&utm_medium=cpc&utm_campaign=filma_sales_general_202608&utm_content=responsive_ad_a&utm_id=search_001&utm_term=video_drm&utm_source_platform=google_ads&gclid=AbC_123-xy&gad_source=1&gad_campaignid=1234567890";
+  assert.deepEqual(
+    links.map((link) => link.href),
+    [expectedUrl, expectedUrl, expectedUrl],
+  );
+});
+
 test("builds a sanitized page URL and a form URL that receives only the management code", async () => {
   const {
     buildFormUrl,
