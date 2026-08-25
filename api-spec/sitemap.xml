@@ -2,42 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.filma.biz/api-spec/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/01-overview/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/02-authentication/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/03-api-key-management/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/04-endpoints/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/05-api-usage-notes/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/06-error-responses/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/07-examples/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/08-cautions/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
     <url>
          <loc>https://docs.filma.biz/api-spec/09-implementation-status/</loc>
-         <lastmod>2026-08-19</lastmod>
+         <lastmod>2026-08-25</lastmod>
     </url>
 </urlset>

@@ -72,6 +72,21 @@ export function buildSanitizedPageUrl(currentUrl, params) {
   return url.href;
 }
 
+export function preserveAttributionOnContactLinks({
+  document,
+  location,
+  enabledClickIdNames = DEFAULT_CLICK_ID_NAMES,
+}) {
+  const { params } = sanitizeAttribution(
+    location.search,
+    enabledClickIdNames,
+  );
+
+  for (const link of document.querySelectorAll("[data-contact-link]")) {
+    link.href = buildSanitizedPageUrl(link.href, params);
+  }
+}
+
 export function buildFormUrl(baseUrl, entryKey, flowCode) {
   const url = new URL(baseUrl);
   url.search = "";
