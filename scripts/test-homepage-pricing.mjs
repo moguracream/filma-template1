@@ -2,8 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 
 const html = await readFile(new URL("../index.html", import.meta.url), "utf8");
-const inquiryFormUrl =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfTXvyTcaS_pHkpMvy8TqeNQpWhyQmFEopaFoI81n2swGNjmA/viewform";
+const contactPagePath = "/contact/";
 
 const expectedContent = [
   "DRMで守るべき動画コンテンツを配信する事業者へ",
@@ -31,9 +30,15 @@ for (const content of expectedContent) {
 }
 
 assert.equal(
-  html.split(`href="${inquiryFormUrl}"`).length - 1,
+  html.split(`href="${contactPagePath}"`).length - 1,
   3,
-  "All three inquiry buttons must link directly to the Google Form",
+  "All three inquiry buttons must route through the contact page",
+);
+
+assert.equal(
+  html.split("data-contact-link").length - 1,
+  3,
+  "All three inquiry buttons must preserve attribution parameters",
 );
 
 assert.ok(!html.includes("Pro（推奨）"), "Pro plan must not include the recommendation label");

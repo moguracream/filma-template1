@@ -29,6 +29,8 @@ on:
       - 'contact/**'
       - 'scripts/test-contact-redirect.mjs'
       - 'scripts/test-homepage-pricing.mjs'
+      - 'scripts/test-preview-pages.mjs'
+      - 'scripts/preview-pages'
       - 'CNAME'
       - '*.md'
       - '_config.yml'
@@ -58,6 +60,7 @@ jobs:
         run: |
           node scripts/test-contact-redirect.mjs
           node scripts/test-homepage-pricing.mjs
+          node scripts/test-preview-pages.mjs
 
       - name: Check docs source
         id: docs-source
