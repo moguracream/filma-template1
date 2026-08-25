@@ -78,6 +78,13 @@ const expectedReadmeOptions = [
   "| 保存容量 ＋1TB | ¥100,000／年 | ¥80,000／年 |",
 ];
 
+const expectedHtmlOptionRows = [
+  /<td>転送量 ＋5TB／年<\/td>\s*<td>¥100,000<\/td>\s*<td>¥80,000<\/td>/,
+  /<td>転送量 ＋10TB／年<\/td>\s*<td>¥180,000<\/td>\s*<td>¥150,000<\/td>/,
+  /<td>保存容量 ＋500GB<\/td>\s*<td>¥60,000／年<\/td>\s*<td>¥50,000／年<\/td>/,
+  /<td>保存容量 ＋1TB<\/td>\s*<td>¥100,000／年<\/td>\s*<td>¥80,000／年<\/td>/,
+];
+
 for (const option of expectedReadmeOptions) {
   assert.ok(readme.includes(option), `README is missing approved option: ${option}`);
 }
@@ -96,6 +103,7 @@ for (const path of ["/lp/elearning/", "/lp/ip/"]) {
 }
 
 for (const page of useCasePages) {
+  const publishedPageHtml = page.html.replace(/<!--[\s\S]*?-->/g, "");
   assert.match(
     page.html,
     /Standard<\/strong><\/td>[\s\S]*?¥498,000[\s\S]*?12TB／年[\s\S]*?<td>1TB<\/td>/,
@@ -106,18 +114,46 @@ for (const page of useCasePages) {
     /Pro<\/strong><\/td>[\s\S]*?¥980,000[\s\S]*?50TB／年[\s\S]*?<td>5TB<\/td>/,
     `${page.name} Pro plan must match the approved homepage plan`,
   );
-  for (const option of expectedReadmeOptions) {
-    const cells = option
-      .split("|")
-      .map((cell) => cell.trim())
-      .filter(Boolean);
-    for (const cell of cells) {
-      assert.ok(page.html.includes(cell), `${page.name} is missing approved option: ${cell}`);
-    }
+  for (const optionRow of expectedHtmlOptionRows) {
+    assert.match(
+      page.html,
+      optionRow,
+      `${page.name} must keep each approved option and its plan prices in the same row`,
+    );
   }
   assert.ok(
     !page.html.includes("詳細はご相談ください"),
     `${page.name} must publish approved option prices`,
+  );
+  for (const technology of ["Widevine", "FairPlay", "PlayReady"]) {
+    assert.ok(page.html.includes(technology), `${page.name} must name ${technology}`);
+  }
+  assert.ok(
+    page.html.includes("ダウンロードにはDRMが適用されません"),
+    `${page.name} must explain that DRM does not cover downloads`,
+  );
+  assert.ok(
+    publishedPageHtml.includes('href="/"'),
+    `${page.name} must publish a route back to the developer use case`,
+  );
+}
+
+assert.ok(
+  useCasePages[0].html.replace(/<!--[\s\S]*?-->/g, "").includes('href="/lp/ip/"'),
+  "e-learning must publish the IP-content use-case route",
+);
+assert.ok(
+  useCasePages[1].html.replace(/<!--[\s\S]*?-->/g, "").includes('href="/lp/elearning/"'),
+  "IP content must publish the e-learning use-case route",
+);
+
+for (const prohibitedClaim of [
+  "大手動画配信サービスと同水準",
+  "会員・購入者以外は再生できません",
+]) {
+  assert.ok(
+    !useCasePages.some((page) => page.html.includes(prohibitedClaim)),
+    `Use-case pages must not contain the absolute claim: ${prohibitedClaim}`,
   );
 }
 
