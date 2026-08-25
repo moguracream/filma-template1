@@ -30,7 +30,7 @@
       <a href="#samples">サンプル</a>
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-small" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
+      <a class="btn btn-primary btn-small" href="/contact/?contact_flow=developer_header&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
     </nav>
   </div>
 </header>
@@ -43,7 +43,7 @@
       <h1>コピペで動く、<br>DRM付き動画配信API。</h1>
       <p class="lead">DRMで守るべき動画コンテンツを配信する事業者へ。Filmaは、有料映像・IPコンテンツ・会員限定動画を自社サービスで配信するための動画配信PaaSです。アップロードするだけでエンコードとマルチDRM暗号化が自動で完了します。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=developer_hero&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
         <a class="btn btn-ghost" href="https://docs.filma.biz/api-spec/">APIリファレンスを見る</a>
       </div>
       <p class="hero-note">ご試用・開発期間中は半年まで完全無料。契約前にAPIとサンプルコードをお試しいただけます。</p>
@@ -107,7 +107,7 @@
         <div class="card">
           <span class="card-icon">🛡️</span>
           <h3>マルチDRM標準対応</h3>
-          <p>アップロードするだけで自動暗号化。不正コピー・ダウンロードを防ぎ、プレミアムコンテンツを保護します。</p>
+          <p>アップロードするだけで自動暗号化。ストリーミング動画の直接取得や、そのままの再配布を難しくします。</p>
         </div>
         <div class="card">
           <span class="card-icon">🔑</span>
@@ -320,7 +320,7 @@
       <h2>守るべき動画を、自社サービスで配信する。</h2>
       <p>有料映像、IPコンテンツ、会員限定動画へのDRM導入やAPI連携をご相談ください。ご試用・開発期間中は半年まで無料で、実際の動画とサンプルコードを使って検証できます。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=developer_footer&amp;contact_market=general" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
         <a class="btn btn-ghost" href="https://docs.filma.biz/">ドキュメントを見る</a>
       </div>
     </div>
@@ -339,15 +339,14 @@
           <li><a href="https://docs.filma.biz/admin-manual/">管理画面マニュアル</a></li>
         </ul>
       </div>
-      <!-- Temporarily hidden: cross-use-case footer links.
       <div>
-        <h3>他の用途で探す</h3>
+        <h3>用途別に見る</h3>
         <ul>
-          <li><a href="/lp/elearning/">eラーニング・社内研修での利用</a></li>
-          <li><a href="/lp/ip/">IPホルダー・版権元の方へ</a></li>
+          <li><a href="/lp/ip/">有料動画・IPコンテンツ</a></li>
+          <li><a href="/lp/elearning/">会員制教育・研修</a></li>
+          <li><a href="/">制作会社・開発会社向け</a></li>
         </ul>
       </div>
-      -->
       <div>
         <h3>規約・提供会社</h3>
         <ul>
@@ -364,7 +363,11 @@
 <script type="module">
   import { preserveAttributionOnContactLinks } from "/assets/js/contact-redirect.mjs";
 
-  preserveAttributionOnContactLinks({ document, location });
+  preserveAttributionOnContactLinks({
+    document,
+    location,
+    sessionStorage: window.sessionStorage,
+  });
 </script>
 
 </body>

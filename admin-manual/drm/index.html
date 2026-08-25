@@ -413,6 +413,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#drm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        対応するDRM方式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRMで保護できる範囲
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#url" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -424,7 +446,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_2" class="md-nav__link">
+  <a href="#drm_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         アップロード時にDRM化する
@@ -435,7 +457,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_3" class="md-nav__link">
+  <a href="#drm_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         既存ファイルをDRM化する
@@ -457,7 +479,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_4" class="md-nav__link">
+  <a href="#drm_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         DRM化できないケース
@@ -465,11 +487,22 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="DRM化できないケース">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラン変更時の注意
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="プラン変更時の注意">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連
@@ -1218,6 +1251,28 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#drm_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        対応するDRM方式
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#drm_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DRMで保護できる範囲
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#url" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1229,7 +1284,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_2" class="md-nav__link">
+  <a href="#drm_4" class="md-nav__link">
     <span class="md-ellipsis">
       
         アップロード時にDRM化する
@@ -1240,7 +1295,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_3" class="md-nav__link">
+  <a href="#drm_5" class="md-nav__link">
     <span class="md-ellipsis">
       
         既存ファイルをDRM化する
@@ -1262,7 +1317,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#drm_4" class="md-nav__link">
+  <a href="#drm_6" class="md-nav__link">
     <span class="md-ellipsis">
       
         DRM化できないケース
@@ -1270,11 +1325,22 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="DRM化できないケース">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        プラン変更時の注意
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="プラン変更時の注意">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
+  <a href="#_3" class="md-nav__link">
     <span class="md-ellipsis">
       
         関連
@@ -1314,8 +1380,25 @@
 有効な認証情報（会員セッションやJWT付きURLなど）を使って再生している状態を指します。</p>
 <p>Filmaでは、DRMは「配信時の保護」を目的として利用します。
 そのため、<strong>ストリーミング再生のみ</strong>が対象で、ダウンロードファイルは対象外です。</p>
+<h2 id="drm_2">対応するDRM方式</h2>
+<p>FilmaのライセンスAPIは、次の3方式に対応しています。</p>
+<ul>
+<li>Widevine</li>
+<li>FairPlay（FPS）</li>
+<li>PlayReady</li>
+</ul>
+<p>実際に利用される方式は、視聴者のOS、ブラウザ、端末、プレイヤー構成によって異なります。すべての端末で同じ方式を使うわけではありません。</p>
+<h2 id="drm_3">DRMで保護できる範囲</h2>
+<p>DRMは、暗号化されたストリーミング動画を、正しいライセンスを取得した環境だけで復号・再生できるようにします。動画ファイルの直接取得や、そのままの再配布を難しくするための仕組みです。</p>
+<p>ただし、次の行為を完全に防ぐものではありません。</p>
+<ul>
+<li>OSや外部機器による画面撮影・録画</li>
+<li>正規ユーザーによる認証情報の共有</li>
+<li>再生中の画面を別のカメラで撮影する行為</li>
+</ul>
+<p>会員認証、JWTの有効期限、同時視聴制御、公開期限などと組み合わせて運用してください。</p>
 <blockquote>
-<p>重要: DRM化したファイルは元に戻せません。</p>
+<p>重要: 一度DRM化したファイルは、同じファイルのままDRMなしへ戻せません。DRMなしで配信する必要がある場合は、元動画からDRMなしのファイルを改めて用意してください。</p>
 </blockquote>
 <h2 id="url">画面URL</h2>
 <ul>
@@ -1323,7 +1406,7 @@
 <li>ファイル詳細: <code>/filmaadmin/file/detail/:file_id</code></li>
 <li>アップロード: <code>/filmaadmin/file/upload/:folder_id</code></li>
 </ul>
-<h2 id="drm_2">アップロード時にDRM化する</h2>
+<h2 id="drm_4">アップロード時にDRM化する</h2>
 <ol>
 <li>アップロード画面でファイルを選択</li>
 <li>「<strong>DRM化する</strong>」にチェック</li>
@@ -1331,7 +1414,7 @@
 </ol>
 <p>アップロード完了後、DRM付きのエンコードタスクが登録されます。</p>
 <p><img alt="アップロード画面（DRM化するチェック）" src="../img/upload_screen_placeholder.svg" /></p>
-<h2 id="drm_3">既存ファイルをDRM化する</h2>
+<h2 id="drm_5">既存ファイルをDRM化する</h2>
 <ol>
 <li>ファイル詳細 <code>/filmaadmin/file/detail/:file_id</code> を開く</li>
 <li>「操作」カードの <strong>DRM化する</strong> をクリック</li>
@@ -1349,15 +1432,17 @@
 <li>「ファイル処理状況」に <strong>DRM</strong> の進行状況が表示されます</li>
 </ul>
 <p><img alt="ファイル一覧（DRM列）" src="../img/file_list_bulk_publish_placeholder.svg" /></p>
-<h2 id="drm_4">DRM化できないケース</h2>
+<h2 id="drm_6">DRM化できないケース</h2>
 <p>以下の場合はボタンが表示されない、または実行できません:</p>
 <ul>
 <li>すでにDRM化済み</li>
 <li>エンコード処理中</li>
 <li>ファイル処理が失敗している</li>
 </ul>
+<h2 id="_2">プラン変更時の注意</h2>
+<p>DRM付き動画はProプランを前提とします。ProからStandardへ変更するとDRM付き動画を再生できなくなるため、原則としてダウングレードできません。StandardからProへ変更し、既存動画へDRMを付ける場合は再エンコードが必要です。</p>
 <hr />
-<h3 id="_2">関連</h3>
+<h3 id="_3">関連</h3>
 <ul>
 <li>動画のアップロード: <a href="../upload/">動画のアップロード</a></li>
 <li>動画の公開: <a href="../publish/">動画の公開</a></li>
