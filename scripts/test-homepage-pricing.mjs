@@ -13,7 +13,6 @@ const useCasePages = [
     html: await readFile(new URL("../lp/ip/index.html", import.meta.url), "utf8"),
   },
 ];
-const contactPagePath = "/contact/";
 
 const expectedContent = [
   "DRMで守るべき動画コンテンツを配信する事業者へ",
@@ -41,9 +40,9 @@ for (const content of expectedContent) {
 }
 
 assert.equal(
-  html.split(`href="${contactPagePath}"`).length - 1,
+  html.match(/href="\/contact\/\?contact_flow=developer_(?:header|hero|footer)"/g)?.length || 0,
   3,
-  "All three inquiry buttons must route through the contact page",
+  "All three inquiry buttons must route through the attributed contact page",
 );
 
 assert.equal(

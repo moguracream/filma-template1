@@ -9,7 +9,14 @@
   <meta property="og:description" content="研修・講座の動画を受講者だけに配信。DRMと会員認証で流出リスクを抑えながら、管理画面だけで運用できます。">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://docs.filma.biz/lp/elearning/">
-  <!-- 計測タグはここに挿入 (未導入) -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-1KZJ2QN1S7"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-1KZJ2QN1S7');
+  </script>
   <link rel="stylesheet" href="/lp/assets/lp-common.css">
   <link rel="stylesheet" href="/lp/assets/theme-elearning.css">
 </head>
@@ -23,7 +30,7 @@
       <a href="#compare">配信方式の選び方</a>
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-small" href="#contact">導入のご相談</a>
+      <a class="btn btn-primary btn-small" href="/contact/?contact_flow=elearning_header" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
     </nav>
   </div>
 </header>
@@ -36,7 +43,7 @@
       <h1>セミナー動画を、社員・会員だけに。<br>安全に、低コストで。</h1>
       <p class="lead">社内研修・セミナーアーカイブ・有料講座の動画を、見せたい人にだけ配信。DRMと会員認証で流出リスクを抑えながら、ふだんの管理画面操作だけで運用できます。プログラマは必要ありません。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#contact">導入のご相談(無料)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=elearning_hero" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
         <a class="btn btn-ghost" href="#compare">配信方式の選び方</a>
       </div>
       <p class="hero-note">ご試用の期間中は半年まで完全無料。じっくり試してから決められます。</p>
@@ -308,7 +315,7 @@
       <h2>まずは、お気軽にご相談ください。</h2>
       <p>現在ローンチ直後のため、お申し込みは原則として紹介制とさせていただいております。「うちの使い方でもできる?」といったご質問だけでも歓迎です。ご試用の期間中は半年まで無料です。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="https://cream.co.jp/">導入のご相談(株式会社クリーム)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=elearning_footer" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
       </div>
     </div>
   </section>
@@ -344,6 +351,16 @@
     <div class="footer-copy">Filma — 動画配信プラットフォーム / 提供: 株式会社クリーム</div>
   </div>
 </footer>
+
+<script type="module">
+  import { preserveAttributionOnContactLinks } from "/assets/js/contact-redirect.mjs";
+
+  preserveAttributionOnContactLinks({
+    document,
+    location,
+    sessionStorage: window.sessionStorage,
+  });
+</script>
 
 </body>
 </html>

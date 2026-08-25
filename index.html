@@ -30,7 +30,7 @@
       <a href="#samples">サンプル</a>
       <a href="#pricing">料金</a>
       <a href="#faq">FAQ</a>
-      <a class="btn btn-primary btn-small" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
+      <a class="btn btn-primary btn-small" href="/contact/?contact_flow=developer_header" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
     </nav>
   </div>
 </header>
@@ -43,7 +43,7 @@
       <h1>コピペで動く、<br>DRM付き動画配信API。</h1>
       <p class="lead">DRMで守るべき動画コンテンツを配信する事業者へ。Filmaは、有料映像・IPコンテンツ・会員限定動画を自社サービスで配信するための動画配信PaaSです。アップロードするだけでエンコードとマルチDRM暗号化が自動で完了します。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=developer_hero" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談(無料)</a>
         <a class="btn btn-ghost" href="https://docs.filma.biz/api-spec/">APIリファレンスを見る</a>
       </div>
       <p class="hero-note">ご試用・開発期間中は半年まで完全無料。契約前にAPIとサンプルコードをお試しいただけます。</p>
@@ -320,7 +320,7 @@
       <h2>守るべき動画を、自社サービスで配信する。</h2>
       <p>有料映像、IPコンテンツ、会員限定動画へのDRM導入やAPI連携をご相談ください。ご試用・開発期間中は半年まで無料で、実際の動画とサンプルコードを使って検証できます。</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="/contact/" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
+        <a class="btn btn-primary" href="/contact/?contact_flow=developer_footer" data-contact-link target="_blank" rel="noopener noreferrer">導入のご相談</a>
         <a class="btn btn-ghost" href="https://docs.filma.biz/">ドキュメントを見る</a>
       </div>
     </div>
@@ -363,7 +363,11 @@
 <script type="module">
   import { preserveAttributionOnContactLinks } from "/assets/js/contact-redirect.mjs";
 
-  preserveAttributionOnContactLinks({ document, location });
+  preserveAttributionOnContactLinks({
+    document,
+    location,
+    sessionStorage: window.sessionStorage,
+  });
 </script>
 
 </body>
