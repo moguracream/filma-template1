@@ -37,7 +37,9 @@ test("routes every LP inquiry CTA through /contact with a stable flow code", asy
     );
     for (const flow of page.flows) {
       assert.ok(
-        html.includes(`href="/contact/?contact_flow=${flow}" data-contact-link`),
+        html.includes(
+          `href="/contact/?contact_flow=${flow}&amp;contact_market=general" data-contact-link`,
+        ),
         `${page.path.pathname} is missing contact flow ${flow}`,
       );
     }
@@ -82,6 +84,25 @@ test("builds a sheet-readable management code from LP and acquisition data", asy
   assert.equal(
     buildContactManagementCode(contact, attribution),
     "lp=elearning|cta=footer|source=google|medium=cpc|campaign=filma_search_general_202609_drm|content=responsive_ad_a|market=general",
+  );
+});
+
+test("uses available Ads campaign identifiers when a campaign name is absent", async () => {
+  const {
+    buildContactManagementCode,
+    sanitizeAttribution,
+    sanitizeContactContext,
+  } = await loadModule();
+  const attribution = sanitizeAttribution(
+    "?gclid=GoogleClick_123&gad_campaignid=987654321",
+  );
+  const contact = sanitizeContactContext(
+    "?contact_flow=developer_header&contact_source=google&contact_medium=cpc&contact_market=general",
+  );
+
+  assert.equal(
+    buildContactManagementCode(contact, attribution),
+    "lp=developer|cta=header|source=google|medium=cpc|campaign=987654321|content=none|market=general",
   );
 });
 
@@ -161,7 +182,7 @@ test("does not retain disabled platform click IDs unless explicitly enabled", as
 test("preserves each CTA flow code while carrying valid acquisition data", async () => {
   const { preserveAttributionOnContactLinks } = await loadModule();
   const links = ["header", "hero", "footer"].map((cta) => ({
-    href: `https://docs.filma.biz/contact/?contact_flow=developer_${cta}`,
+    href: `https://docs.filma.biz/contact/?contact_flow=developer_${cta}&contact_market=general`,
   }));
   const document = {
     referrer: "https://www.google.com/search?q=filma",
@@ -202,7 +223,7 @@ test("keeps the original external referrer across internal LP navigation", async
     },
   };
   const firstLink = {
-    href: "https://docs.filma.biz/contact/?contact_flow=ip_hero",
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_hero&contact_market=general",
   };
 
   preserveAttributionOnContactLinks({
@@ -224,7 +245,7 @@ test("keeps the original external referrer across internal LP navigation", async
   assert.equal(new URL(firstLink.href).searchParams.get("contact_medium"), "referral");
 
   const secondLink = {
-    href: "https://docs.filma.biz/contact/?contact_flow=elearning_footer",
+    href: "https://docs.filma.biz/contact/?contact_flow=elearning_footer&contact_market=general",
   };
   preserveAttributionOnContactLinks({
     document: {
@@ -245,10 +266,87 @@ test("keeps the original external referrer across internal LP navigation", async
   assert.equal(new URL(secondLink.href).searchParams.get("contact_medium"), "referral");
 });
 
+test("does not let same-origin UTM tags overwrite stored acquisition", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const values = new Map();
+  const sessionStorage = {
+    getItem(key) {
+      return values.get(key) || null;
+    },
+    setItem(key, value) {
+      values.set(key, value);
+    },
+  };
+  const landingLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=developer_hero&contact_market=general",
+  };
+
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://www.google.com/",
+      querySelectorAll() {
+        return [landingLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/?utm_source=google&utm_medium=cpc&gclid=Original_123",
+      hostname: "docs.filma.biz",
+      search: "?utm_source=google&utm_medium=cpc&gclid=Original_123",
+    },
+    sessionStorage,
+  });
+
+  const internalLink = {
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_footer&contact_market=general",
+  };
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "https://docs.filma.biz/",
+      querySelectorAll() {
+        return [internalLink];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/ip/?utm_source=internal&utm_medium=navigation",
+      hostname: "docs.filma.biz",
+      search: "?utm_source=internal&utm_medium=navigation",
+    },
+    sessionStorage,
+  });
+
+  const url = new URL(internalLink.href);
+  assert.equal(url.searchParams.get("utm_source"), "google");
+  assert.equal(url.searchParams.get("utm_medium"), "cpc");
+  assert.equal(url.searchParams.get("gclid"), "Original_123");
+  assert.equal(url.searchParams.has("navigation"), false);
+});
+
+test("honors an explicitly mapped special-market CTA", async () => {
+  const { preserveAttributionOnContactLinks } = await loadModule();
+  const link = {
+    href: "https://docs.filma.biz/contact/?contact_flow=ip_footer&contact_market=special",
+  };
+  preserveAttributionOnContactLinks({
+    document: {
+      referrer: "",
+      querySelectorAll() {
+        return [link];
+      },
+    },
+    location: {
+      href: "https://docs.filma.biz/lp/ip/",
+      hostname: "docs.filma.biz",
+      search: "",
+    },
+  });
+
+  assert.equal(new URL(link.href).searchParams.get("contact_market"), "special");
+});
+
 test("classifies Google Ads click IDs when manual UTM parameters are absent", async () => {
   const { preserveAttributionOnContactLinks } = await loadModule();
   const link = {
-    href: "https://docs.filma.biz/contact/?contact_flow=developer_hero",
+    href: "https://docs.filma.biz/contact/?contact_flow=developer_hero&contact_market=general",
   };
 
   preserveAttributionOnContactLinks({

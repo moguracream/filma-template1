@@ -116,6 +116,16 @@ function getExternalReferrerHost(document, location) {
   }
 }
 
+function hasSameOriginReferrer(document, location) {
+  if (!document?.referrer) return false;
+
+  try {
+    return new URL(document.referrer).origin === new URL(location.href).origin;
+  } catch {
+    return false;
+  }
+}
+
 function inferPaidClickTraffic(clickIds) {
   const googleClickNames = [
     "gclid",
@@ -190,12 +200,21 @@ export function buildContactManagementCode(contact, attribution) {
     ["cta", contact.cta],
     ["source", source],
     ["medium", medium],
-    ["campaign", attribution.utm.utm_campaign || "none"],
+    ["campaign", getCampaignIdentifier(attribution)],
     ["content", attribution.utm.utm_content || "none"],
     ["market", contact.values.contact_market || "general"],
   ]
     .map(([name, value]) => `${name}=${value}`)
     .join("|");
+}
+
+function getCampaignIdentifier(attribution) {
+  return (
+    attribution.utm.utm_campaign ||
+    attribution.utm.utm_id ||
+    attribution.clickIds.gad_campaignid ||
+    "none"
+  );
 }
 
 export function buildSanitizedPageUrl(currentUrl, params) {
@@ -216,6 +235,8 @@ export function preserveAttributionOnContactLinks({
     enabledClickIdNames,
   );
   const externalReferrer = getExternalReferrerHost(document, location);
+  const sameOriginReferrer = hasSameOriginReferrer(document, location);
+  const stored = readStoredAttribution(sessionStorage);
   const paidClickTraffic = inferPaidClickTraffic(attribution.clickIds);
   let source =
     attribution.utm.utm_source ||
@@ -226,14 +247,15 @@ export function preserveAttributionOnContactLinks({
     paidClickTraffic.medium ||
     (externalReferrer ? "referral" : "");
 
-  if (!attribution.params.toString() && !externalReferrer) {
-    const stored = readStoredAttribution(sessionStorage);
-    if (stored) {
-      attribution = stored.attribution;
-      source = stored.source;
-      medium = stored.medium;
-    }
-  } else {
+  if (
+    stored &&
+    (sameOriginReferrer ||
+      (!attribution.params.toString() && !externalReferrer))
+  ) {
+    attribution = stored.attribution;
+    source = stored.source;
+    medium = stored.medium;
+  } else if (attribution.params.toString() || externalReferrer) {
     storeAttribution(sessionStorage, attribution, source, medium);
   }
 
@@ -243,7 +265,10 @@ export function preserveAttributionOnContactLinks({
   for (const link of document.querySelectorAll("[data-contact-link]")) {
     const targetUrl = new URL(link.href, location.href);
     const contact = sanitizeContactContext(targetUrl.search);
-    const params = new URLSearchParams(contact.params);
+    const params = new URLSearchParams();
+    if (contact.values.contact_flow) {
+      params.set("contact_flow", contact.values.contact_flow);
+    }
     params.set("contact_source", source);
     params.set("contact_medium", medium);
     params.set("contact_market", contact.values.contact_market || "general");
@@ -338,7 +363,7 @@ export function startContactRedirect({
       attribution.utm.utm_medium ||
       contact.values.contact_medium ||
       "none",
-    contact_campaign: attribution.utm.utm_campaign || "none",
+    contact_campaign: getCampaignIdentifier(attribution),
     contact_market: contact.values.contact_market || "general",
     event_callback: redirect,
     event_timeout: timeoutMs,

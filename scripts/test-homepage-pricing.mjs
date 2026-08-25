@@ -40,7 +40,9 @@ for (const content of expectedContent) {
 }
 
 assert.equal(
-  html.match(/href="\/contact\/\?contact_flow=developer_(?:header|hero|footer)"/g)?.length || 0,
+  html.match(
+    /href="\/contact\/\?contact_flow=developer_(?:header|hero|footer)&amp;contact_market=general"/g,
+  )?.length || 0,
   3,
   "All three inquiry buttons must route through the attributed contact page",
 );
