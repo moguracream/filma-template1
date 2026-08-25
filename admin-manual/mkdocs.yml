@@ -39,6 +39,8 @@ nav:
   - 運用:
     - 非公開化・削除: unpublish_delete.md
     - ユーザーの種類: users.md
+    - 再生アクセス解析: accesslog.md
+    - APIアクセス解析（Platform）: api_access.md
   - 会員機能:
     - 概要: membership_overview.md
     - 管理者・権限の基本: membership_admin.md
