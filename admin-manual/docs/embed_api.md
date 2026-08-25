@@ -57,7 +57,7 @@ title: APIを使った埋め込み
 
 ## ライセンスAPIについて（重要）
 
-DRM再生時はプレイヤーがライセンス取得（Widevine/FairPlay）を行います。
+DRM再生時はプレイヤーがライセンス取得（Widevine/FairPlay/PlayReady）を行います。
 **ライセンス要求にも APIキー または JWT が必要**です。
 
 - **APIキー運用**: ライセンスURLに `api_key` を付与する必要があります
@@ -101,4 +101,5 @@ JWT はできるだけ自社バックエンドで発行・配布する運用を�
 ### 次にやること / 関連
 
 - HTML埋め込みへ戻る: [埋め込みHTML](embed_html.md)
+- WordPressで埋め込む: [WordPressへの埋め込み](embed_wordpress.md)
 - 期限付きURLの発行・管理: [期限付きURLの発行](signedurl.md)
