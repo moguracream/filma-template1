@@ -25,6 +25,14 @@ if [ -d "$ROOT/lp" ]; then
   cp -a "$ROOT/lp" "$OUT/lp"
 fi
 
+# Contact redirect endpoint and its shared JavaScript module.
+if [ -d "$ROOT/contact" ]; then
+  cp -a "$ROOT/contact" "$OUT/contact"
+fi
+if [ -d "$ROOT/assets" ]; then
+  cp -a "$ROOT/assets" "$OUT/assets"
+fi
+
 # Custom domain marker (harmless locally, keeps parity with publish/)
 if [ -f "$ROOT/CNAME" ]; then
   cp -f "$ROOT/CNAME" "$OUT/CNAME"
@@ -38,6 +46,7 @@ find "$ROOT" -maxdepth 1 -type f -name '*.md' \
 
 echo "Preview ready at http://localhost:${PORT}/"
 echo "  top page      -> http://localhost:${PORT}/"
+echo "  contact       -> http://localhost:${PORT}/contact/"
 echo "  elearning LP  -> http://localhost:${PORT}/lp/elearning/"
 echo "  ip LP         -> http://localhost:${PORT}/lp/ip/"
 echo "(Ctrl+C to stop)"
